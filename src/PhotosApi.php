@@ -124,10 +124,27 @@ class PhotosApi extends ApiMethodGroup
         if (!isset($sets['photoset'])) {
             return false;
         }
-        foreach ($sets['photoset'] as $photoset) {
-            foreach ($photoIds as $photoId) {
-                if (in_array($photoId, $photoset['has_requested_photos'])) {
-                    $out[] = $photoset;
+        
+        // for users with more than 500 albums, we must search the photoId page by page (thanks, Flickr...)
+        foreach (range(1,$sets['pages']) as $count) {
+            if ($count == 1){
+                // do not redownload the first page
+                $sets = $sets;
+            } else {
+                // download the next page of photosets to search
+                $sets = $this->flickr->photosets()->getList(
+                    $userId,
+                    $count,
+                    null,
+                    null,
+                    $photoIdsString
+                    );
+            }
+            foreach ($sets['photoset'] as $photoset) {
+                foreach ($photoIds as $photoId) {
+                    if (in_array($photoId, $photoset['has_requested_photos'])) {
+                        $out[] = $photoset;
+                    }
                 }
             }
         }
