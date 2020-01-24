@@ -25,6 +25,7 @@ abstract class TestCase extends PhpUnitTestCase
         }
 
         require __DIR__.'/config.php';
+        echo "\nUsing API key: $apiKey\n";
         $this->flickr = new PhpFlickr($apiKey, $apiSecret);
 
         // Authenticate?
