@@ -127,7 +127,7 @@ class PhotosApi extends ApiMethodGroup
         
         // for users with more than 500 albums, we must search the photoId page by page (thanks, Flickr...)
         foreach (range(1, $sets['pages']) as $pageNum) {
-            if ($pageNum > 1){
+            if ($pageNum > 1) {
                 // download the next page of photosets to search
                 $sets = $this->flickr->photosets()->getList(
                     $userId,
