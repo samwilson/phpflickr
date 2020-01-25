@@ -24,7 +24,7 @@ abstract class TestCase extends PhpUnitTestCase
             return $this->flickr;
         }
 
-        require __DIR__.'/config.php';
+        require __DIR__ . '/config.php';
         if (empty($apiKey)) {
             // Skip if no key, so PRs from forks can still be run on Travis.
             static::markTestSkipped('No Flickr API key set.');

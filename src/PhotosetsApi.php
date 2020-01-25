@@ -202,7 +202,7 @@ class PhotosetsApi extends ApiMethodGroup
         if (is_array($extras)) {
             $extras = join(',', $extras);
         }
-        $args= [
+        $args = [
             'photoset_id' => $photosetId,
             'user_id' => $userId,
             'extras' => $extras,

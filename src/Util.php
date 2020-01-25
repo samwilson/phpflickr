@@ -27,14 +27,14 @@ class Util
         $base_count = strlen(static::BASE58_ALPHABET);
         $encoded = '';
         while ($num >= $base_count) {
-            $div = $num/$base_count;
-            $mod = ($num-($base_count*intval($div)));
-            $encoded = static::BASE58_ALPHABET[$mod].$encoded;
+            $div = $num / $base_count;
+            $mod = ($num - ($base_count * intval($div)));
+            $encoded = static::BASE58_ALPHABET[$mod] . $encoded;
             $num = intval($div);
         }
 
         if ($num) {
-            $encoded = static::BASE58_ALPHABET[$num].$encoded;
+            $encoded = static::BASE58_ALPHABET[$num] . $encoded;
         }
 
         return $encoded;
@@ -51,7 +51,7 @@ class Util
         $decoded = 0;
         $multi = 1;
         while (strlen($num) > 0) {
-            $digit = $num[strlen($num)-1];
+            $digit = $num[strlen($num) - 1];
             $decoded += $multi * strpos(static::BASE58_ALPHABET, $digit);
             $multi = $multi * strlen(static::BASE58_ALPHABET);
             $num = substr($num, 0, -1);

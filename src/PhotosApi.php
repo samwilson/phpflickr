@@ -63,7 +63,7 @@ class PhotosApi extends ApiMethodGroup
                 // It's not possible to have double quotes in a tag.
                 $cleanTag = str_replace('"', '', $tag);
                 // Wrap any tag with spaces in it inside double quotes.
-                return strpos($cleanTag, ' ') ? '"'.$cleanTag.'"' : $cleanTag;
+                return strpos($cleanTag, ' ') ? '"' . $cleanTag . '"' : $cleanTag;
             }, $tags);
             $tagString = implode(' ', $quotedTags);
         }
@@ -82,7 +82,7 @@ class PhotosApi extends ApiMethodGroup
      */
     public function delete($photoId)
     {
-        return (bool)$this->flickr->request('flickr.photos.delete', ['photo_id'=>$photoId], true);
+        return (bool)$this->flickr->request('flickr.photos.delete', ['photo_id' => $photoId], true);
     }
 
     /**
@@ -94,7 +94,7 @@ class PhotosApi extends ApiMethodGroup
      */
     public function getAllContexts($photoId)
     {
-        return $this->request('flickr.photos.getAllContexts', ['photo_id'=>$photoId]);
+        return $this->request('flickr.photos.getAllContexts', ['photo_id' => $photoId]);
     }
 
     /**
@@ -126,7 +126,7 @@ class PhotosApi extends ApiMethodGroup
             'count' => $count,
             'just_friends' => $justFriends,
             'single_photo' => $singlePhoto,
-            'include_self'=> $includeSelf,
+            'include_self' => $includeSelf,
             'extras' => $extras
         ];
         $response = $this->flickr->request('flickr.photos.getContactsPhotos', $params);
@@ -165,7 +165,7 @@ class PhotosApi extends ApiMethodGroup
             'count' => $count,
             'just_friends' => $justFriends,
             'single_photo' => $singlePhoto,
-            'include_self'=> $includeSelf,
+            'include_self' => $includeSelf,
             'extras' => $extras
         ];
         $response = $this->flickr->request('flickr.photos.getContactsPublicPhotos', $params);
@@ -218,7 +218,7 @@ class PhotosApi extends ApiMethodGroup
      */
     public function getExif($photoId, $secret = null)
     {
-        $response = $this->flickr->request('flickr.photos.getExif', ['photo_id'=>$photoId, 'secret'=>$secret]);
+        $response = $this->flickr->request('flickr.photos.getExif', ['photo_id' => $photoId, 'secret' => $secret]);
         return isset($response['photo']) ? $response['photo'] : false;
     }
 
@@ -234,7 +234,7 @@ class PhotosApi extends ApiMethodGroup
      */
     public function getFavorites($photoId, $page = null, $perPage = null)
     {
-        $params = ['photo_id'=>$photoId, 'page'=>$page, 'per_page'=>$perPage];
+        $params = ['photo_id' => $photoId, 'page' => $page, 'per_page' => $perPage];
         $response = $this->flickr->request('flickr.photos.getFavorites', $params);
         return isset($response['photo']) ? $response['photo'] : false;
     }
