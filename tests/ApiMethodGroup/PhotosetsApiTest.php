@@ -13,7 +13,7 @@ class PhotosetsApiTest extends TestCase
     {
         parent::setUp();
         $flickr = $this->getFlickr(true);
-        $testFilename = dirname(__DIR__).'/../examples/Agateware_Example.JPG';
+        $testFilename = dirname(__DIR__) . '/../examples/Agateware_Example.JPG';
         $uploaded = $flickr->uploader()->upload($testFilename);
         $this->testPhotoId = $uploaded['photoid'];
     }

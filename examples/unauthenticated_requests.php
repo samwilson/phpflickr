@@ -1,17 +1,18 @@
 <?php
+
 /**
  * The simplest example of PhpFlickr: an API call that doesn't require authentication.
  * In this situation, you don't need to provide the API secret.
  * @file
  */
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Get the configuration information; in this case, only the API key.
-$configFile = __DIR__.'/config.php';
+$configFile = __DIR__ . '/config.php';
 require_once $configFile;
 if (empty($apiKey)) {
-    echo 'Please set $apiKey in '.$configFile;
+    echo 'Please set $apiKey in ' . $configFile;
     exit(1);
 }
 

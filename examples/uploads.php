@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Make sure we have the required configuration values.
-$configFile = __DIR__.'/config.php';
+$configFile = __DIR__ . '/config.php';
 require_once $configFile;
 if (empty($apiKey) || empty($apiSecret) || empty($accessToken) || empty($accessTokenSecret)) {
-    echo 'Please set $apiKey, $apiSecret, $accessToken, and $accessTokenSecret in '.$configFile;
+    echo 'Please set $apiKey, $apiSecret, $accessToken, and $accessTokenSecret in ' . $configFile;
     exit(1);
 }
 
@@ -27,7 +27,7 @@ $phpFlickr->setOauthStorage($storage);
 $description = 'An example of agate pottery. By Anonymouse512.
 Via Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Agateware_Example.JPG';
 $result = $phpFlickr->uploader()->upload(
-    __DIR__.'/Agateware_Example.JPG',
+    __DIR__ . '/Agateware_Example.JPG',
     'Test photo',
     $description,
     'Agateware pots',
@@ -36,4 +36,4 @@ $result = $phpFlickr->uploader()->upload(
     true
 );
 $info = $phpFlickr->photos()->getInfo($result['photoid']);
-echo "The new photo is: ".$info['urls']['url'][0]['_content']."\n";
+echo "The new photo is: " . $info['urls']['url'][0]['_content'] . "\n";

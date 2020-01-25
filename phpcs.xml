@@ -14,9 +14,12 @@
     <exclude-pattern>./src/Pager.php</exclude-pattern>
     <exclude-pattern>./src/PhpFlickr.php</exclude-pattern>
 
-    <rule ref="PSR2" />
-    <rule ref="Squiz.Strings.ConcatenationSpacing" />
-    <rule ref="Generic.NamingConventions.CamelCapsFunctionName" />
+    <rule ref="PSR12" />
+
+    <!-- Exclude until we drop PHP 5. -->
+    <rule ref="PSR12.Properties.ConstantVisibility.NotFound">
+        <exclude-pattern>./src</exclude-pattern>
+    </rule>
 
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
         <exclude-pattern>./examples/*</exclude-pattern>

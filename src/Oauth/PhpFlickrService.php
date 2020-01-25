@@ -25,7 +25,7 @@ class PhpFlickrService extends Flickr
         UriInterface $baseApiUri = null
     ) {
         if ($baseApiUri === null) {
-            $baseApiUri = new Uri(static::$baseUrl.'/rest/');
+            $baseApiUri = new Uri(static::$baseUrl . '/rest/');
         }
         parent::__construct($credentials, $httpClient, $storage, $signature, $baseApiUri);
     }
@@ -40,17 +40,17 @@ class PhpFlickrService extends Flickr
 
     public function getRequestTokenEndpoint()
     {
-        return new Uri(static::$baseUrl.'/oauth/request_token');
+        return new Uri(static::$baseUrl . '/oauth/request_token');
     }
 
     public function getAuthorizationEndpoint()
     {
-        return new Uri(static::$baseUrl.'/oauth/authorize');
+        return new Uri(static::$baseUrl . '/oauth/authorize');
     }
 
     public function getAccessTokenEndpoint()
     {
-        return new Uri(static::$baseUrl.'/oauth/access_token');
+        return new Uri(static::$baseUrl . '/oauth/access_token');
     }
 
     /**

@@ -45,15 +45,20 @@ class UrlsApi extends ApiMethodGroup
         }
 
         // Create non-medium suffix.
-        if (in_array('_'.$size, $sizeSuffixes)) {
-            $sizeSuffix = '_'.$size;
+        if (in_array('_' . $size, $sizeSuffixes)) {
+            $sizeSuffix = '_' . $size;
         }
 
-        $url = 'https://farm'.$photoInfo['farm'].'.staticflickr.com/'.$photoInfo['server'].'/'.$photoInfo['id'];
+        $url = sprintf(
+            'https://farm%s.staticflickr.com/%s/%s',
+            $photoInfo['farm'],
+            $photoInfo['server'],
+            $photoInfo['id']
+        );
         if ($size === PhotosApi::SIZE_ORIGINAL) {
-            $url .= '_'.$photoInfo['originalsecret'].'_o.'.$photoInfo['originalformat'];
+            $url .= '_' . $photoInfo['originalsecret'] . '_o.' . $photoInfo['originalformat'];
         } else {
-            $url .= '_'.$photoInfo['secret'].$sizeSuffix.'.jpg';
+            $url .= '_' . $photoInfo['secret'] . $sizeSuffix . '.jpg';
         }
         return $url;
     }
@@ -65,7 +70,7 @@ class UrlsApi extends ApiMethodGroup
      */
     public function getShortUrl($photoId)
     {
-        return 'https://flic.kr/p/'.Util::base58encode($photoId);
+        return 'https://flic.kr/p/' . Util::base58encode($photoId);
     }
 
     /**

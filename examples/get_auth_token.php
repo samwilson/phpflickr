@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file demonstrates the authentication workflows for both browser and CLI.
  *
@@ -9,12 +10,12 @@
  * @file
  */
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$configFile = __DIR__.'/config.php';
+$configFile = __DIR__ . '/config.php';
 require_once $configFile;
 if (empty($apiKey) || empty($apiSecret)) {
-    echo 'Please set $apiKey and $apiSecret in '.$configFile;
+    echo 'Please set $apiKey and $apiSecret in ' . $configFile;
     exit(1);
 }
 $flickr = new \Samwilson\PhpFlickr\PhpFlickr($apiKey, $apiSecret);
@@ -27,7 +28,7 @@ if (isset($_SERVER['SERVER_NAME'])) {
     $flickr->setOauthStorage($storage);
 
     if (!isset($_GET['oauth_token'])) {
-        $callbackHere = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+        $callbackHere = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
         $url = $flickr->getAuthUrl('delete', $callbackHere);
         echo "<a href='$url'>$url</a>";
     }
@@ -53,8 +54,8 @@ if (isset($accessToken) && $accessToken instanceof \OAuth\Common\Token\TokenInte
     /*
      * You should save the access token and its secret somewhere safe.
      */
-    echo '$accessToken = "'.$accessToken->getAccessToken().'";'.PHP_EOL;
-    echo '$accessTokenSecret = "'.$accessToken->getAccessTokenSecret().'";'.PHP_EOL;
+    echo '$accessToken = "' . $accessToken->getAccessToken() . '";' . PHP_EOL;
+    echo '$accessTokenSecret = "' . $accessToken->getAccessTokenSecret() . '";' . PHP_EOL;
 
     /*
      * Any methods can now be called.

@@ -34,7 +34,7 @@ class PhotosLicensesApi extends ApiMethodGroup
     public function setLicense($photoId, $licenseId)
     {
         $method = 'flickr.photos.licenses.setLicense';
-        $params = ['photo_id'=>$photoId, 'license_id'=>$licenseId];
+        $params = ['photo_id' => $photoId, 'license_id' => $licenseId];
         return $this->flickr->request($method, $params, true);
     }
 }
