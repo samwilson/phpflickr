@@ -94,7 +94,7 @@ class PhotosApi extends ApiMethodGroup
      */
     public function getAllContexts($photoId)
     {
-        return $this->request('flickr.photos.getAllContexts', ['photo_id' => $photoId]);
+        return $this->flickr->request('flickr.photos.getAllContexts', ['photo_id' => $photoId]);
     }
 
     /**
