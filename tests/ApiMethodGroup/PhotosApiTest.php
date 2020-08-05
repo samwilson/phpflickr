@@ -9,7 +9,6 @@ use Samwilson\PhpFlickr\Util;
 
 class PhotosApiTest extends TestCase
 {
-
     /** @var int */
     protected $testPhotoId;
 
@@ -58,6 +57,9 @@ class PhotosApiTest extends TestCase
             ['Tag', 'Iñtërnâtiônàlizætiøn', 'Third Tag', 'Four', 'With quotes'],
             $tags2
         );
+
+        // Clean up.
+        $flickr->photos()->delete($photo['photoid']);
     }
 
     public function testSetTags()
@@ -80,12 +82,15 @@ class PhotosApiTest extends TestCase
     {
         $flickr = $this->getFlickr(true);
         $testFilename = dirname(__DIR__) . '/../examples/Agateware_Example.JPG';
-        $flickr->uploader()->upload($testFilename);
+        $photo = $flickr->uploader()->upload($testFilename);
         $search = $flickr->photos()->search([
             'user_id' => 'me',
             'text' => 'Agateware_Example',
         ]);
         static::assertGreaterThan(1, count($search['photo']));
+
+        // Clean up.
+        $flickr->photos()->delete($photo['photoid']);
     }
 
     public function testSetMeta()
@@ -103,6 +108,9 @@ class PhotosApiTest extends TestCase
         // Test for an error with an invalid photo ID.
         static::expectExceptionMessage('Photo "1" not found (invalid ID)');
         $flickr->photos()->setMeta(1, 'Lorem');
+
+        // Clean up.
+        $flickr->photos()->delete($testPhotoId);
     }
 
     public function testSetDates()
@@ -119,5 +127,8 @@ class PhotosApiTest extends TestCase
         $info = $flickr->photos()->getInfo($testPhotoId);
         static::assertEquals('2019-01-01 00:00:00', $info['dates']['taken']);
         static::assertEquals(6, $info['dates']['takengranularity']);
+
+        // Clean up.
+        $flickr->photos()->delete($testPhotoId);
     }
 }

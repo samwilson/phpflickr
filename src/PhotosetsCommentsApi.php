@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosetsCommentsApi extends ApiMethodGroup
 {
-
     /**
      * Add a comment to a photoset.
      *

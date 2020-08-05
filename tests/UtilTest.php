@@ -6,7 +6,6 @@ use Samwilson\PhpFlickr\Util;
 
 class UtilTest extends TestCase
 {
-
     public function testPrivacyLevels()
     {
         $this->assertEquals('public', Util::getPrivacyLevelById(Util::PRIVACY_PUBLIC));

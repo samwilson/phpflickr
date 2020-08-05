@@ -7,7 +7,6 @@ use Samwilson\PhpFlickr\Tests\TestCase;
 
 class UrlsApiTest extends TestCase
 {
-
     /**
      * @dataProvider provideGetImageUrl
      */

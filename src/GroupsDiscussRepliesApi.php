@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class GroupsDiscussRepliesApi extends ApiMethodGroup
 {
-
     /**
      * Post a new reply to a group discussion topic.
      *

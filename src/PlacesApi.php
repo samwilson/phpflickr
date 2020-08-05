@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PlacesApi extends ApiMethodGroup
 {
-
     /**
      * Return a list of place IDs for a query string.<br /><br />
 The

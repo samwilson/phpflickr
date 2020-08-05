@@ -7,7 +7,7 @@ https://github.com/samwilson/phpflickr
 
 [![Packagist](https://img.shields.io/packagist/v/samwilson/phpflickr.svg)](https://packagist.org/packages/samwilson/phpflickr)
 
-[![Build Status](https://travis-ci.com/samwilson/phpflickr.svg?branch=master)](https://travis-ci.com/samwilson/phpflickr)
+[![Build status](https://github.com/samwilson/phpflickr/workflows/CI/badge.svg)](https://github.com/samwilson/phpflickr/actions/workflows/ci.yml)
 
 Table of contents:
 

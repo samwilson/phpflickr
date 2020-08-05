@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PeopleApi extends ApiMethodGroup
 {
-
     /**
      * Return a user's NSID, given their email address
      *

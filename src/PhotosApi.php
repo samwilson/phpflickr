@@ -6,7 +6,6 @@ use DateTime;
 
 class PhotosApi extends ApiMethodGroup
 {
-
     /** Size s: small square 75x75 */
     const SIZE_SMALL_SQUARE = 's';
 

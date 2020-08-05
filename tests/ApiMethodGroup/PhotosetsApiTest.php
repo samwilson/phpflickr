@@ -6,7 +6,6 @@ use Samwilson\PhpFlickr\Tests\TestCase;
 
 class PhotosetsApiTest extends TestCase
 {
-
     protected $testPhotoId;
 
     public function setUp()

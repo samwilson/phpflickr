@@ -8,7 +8,6 @@ use Samwilson\PhpFlickr\PhpFlickr;
 
 abstract class TestCase extends PhpUnitTestCase
 {
-
     /** @var PhpFlickr */
     private $flickr;
 
@@ -24,9 +23,16 @@ abstract class TestCase extends PhpUnitTestCase
             return $this->flickr;
         }
 
-        require __DIR__ . '/config.php';
+        // Get config values from env vars or the tests/config.php file.
+        $apiKey = getenv('FLICKR_API_KEY');
+        $apiSecret = getenv('FLICKR_API_SECRET');
+        $accessToken = getenv('FLICKR_ACCESS_TOKEN');
+        $accessTokenSecret = getenv('FLICKR_ACCESS_SECRET');
         if (empty($apiKey)) {
-            // Skip if no key, so PRs from forks can still be run on Travis.
+            require __DIR__ . '/config.php';
+        }
+        if (empty($apiKey)) {
+            // Skip if no key found, so PRs from forks can still be run in CI.
             static::markTestSkipped('No Flickr API key set.');
         }
         $this->flickr = new PhpFlickr($apiKey, $apiSecret);

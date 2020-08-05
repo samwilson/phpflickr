@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosCommentsApi extends ApiMethodGroup
 {
-
     /**
      * Add comment to a photo as the currently authenticated user.
      *

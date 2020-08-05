@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class CollectionsApi extends ApiMethodGroup
 {
-
     /**
      * Returns information for a single collection.  Currently can only be called by
      * the collection owner, this may change.

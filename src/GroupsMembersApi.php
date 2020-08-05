@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class GroupsMembersApi extends ApiMethodGroup
 {
-
     /**
      * Get a list of the members of a group.  The call must be signed on behalf of a
      * Flickr member, and the ability to see the group membership will be determined by

@@ -15,7 +15,9 @@
     <exclude-pattern>./src/Pager.php</exclude-pattern>
     <exclude-pattern>./src/PhpFlickr.php</exclude-pattern>
 
-    <rule ref="PSR12" />
+    <rule ref="PSR12">
+        <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
+    </rule>
 
     <!-- Exclude until we drop PHP 5. -->
     <rule ref="PSR12.Properties.ConstantVisibility.NotFound">

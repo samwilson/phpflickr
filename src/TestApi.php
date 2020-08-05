@@ -6,7 +6,6 @@ use OAuth\Common\Http\Exception\TokenResponseException;
 
 class TestApi extends ApiMethodGroup
 {
-
     /**
      * A testing method which echos all request parameters back in the response.
      * (Note that this method name does not follow normal PhpFlickr nomenclature,

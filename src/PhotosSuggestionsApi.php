@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosSuggestionsApi extends ApiMethodGroup
 {
-
     /**
      * Approve a suggestion for a photo.
      *

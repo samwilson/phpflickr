@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class GroupsApi extends ApiMethodGroup
 {
-
     /**
      * Browse the group category tree, finding groups and sub-categories.
      *

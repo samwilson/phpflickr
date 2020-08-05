@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class TestimonialsApi extends ApiMethodGroup
 {
-
     /**
      * Write a new testimonial
      *

@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosGeoApi extends ApiMethodGroup
 {
-
     /**
      * Correct the places hierarchy for all the photos for a user at a given latitude,
      * longitude and accuracy.<br /><br />

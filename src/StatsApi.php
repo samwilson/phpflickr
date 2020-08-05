@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class StatsApi extends ApiMethodGroup
 {
-
     /**
      * Get a list of referring domains for a collection
      *

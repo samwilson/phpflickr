@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class FavoritesApi extends ApiMethodGroup
 {
-
     /**
      * Adds a photo to a user's favorites list.
      *

@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class ProfileApi extends ApiMethodGroup
 {
-
     /**
      * Returns specified user's profile info, respecting profile privacy settings
      *

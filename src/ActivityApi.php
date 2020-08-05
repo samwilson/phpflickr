@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class ActivityApi extends ApiMethodGroup
 {
-
     /**
      * Returns a list of recent activity on photos commented on by the calling user.
      * <b>Do not poll this method more than once an hour</b>.

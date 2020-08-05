@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosetsApi extends ApiMethodGroup
 {
-
     /**
      * Add a photo to the end of an existing photoset.
      *

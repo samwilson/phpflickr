@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosNotesApi extends ApiMethodGroup
 {
-
     /**
      * Add a note to a photo. Coordinates and sizes are in pixels, based on the 500px
      * image size shown on individual photo pages.

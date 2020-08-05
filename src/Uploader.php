@@ -9,7 +9,6 @@ use SimpleXMLElement;
 
 class Uploader
 {
-
     /** @var PhpFlickr */
     protected $flickr;
 
