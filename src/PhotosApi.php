@@ -48,6 +48,9 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Add tags to a photo.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.addTags.html
      * @param string $photoId The photo to add tags to.
      * @param string|string[] $tags A space-separated string of tags (double-quoted, where
@@ -76,6 +79,8 @@ class PhotosApi extends ApiMethodGroup
     /**
      * Delete a photo from flickr.
      *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.delete.html
      * @param $photoId string The ID of the photo to delete.
      * @return bool
@@ -88,6 +93,8 @@ class PhotosApi extends ApiMethodGroup
     /**
      * Returns all visible sets and pools the photo belongs to.
      *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.getAllContexts.html
      * @param $photoId string The photo to return information for.
      * @return bool
@@ -99,6 +106,8 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Fetch a list of recent photos from the calling users' contacts.
+     *
+     * This method requires authentication.
      *
      * @link https://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html
      * @param $count int|null Number of photos to return. Defaults to 10, maximum 50. This is only used if single_photo
@@ -135,6 +144,8 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Fetch a list of recent public photos from a users' contacts.
+     *
+     * This method does not require authentication.
      *
      * @link https://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html
      * @param $userId string The NSID of the user to fetch photos for.
@@ -175,6 +186,8 @@ class PhotosApi extends ApiMethodGroup
     /**
      * Returns next and previous photos for a photo in a photostream.
      *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.getContext.html
      * @param $photoId string The ID of the photo to fetch the context for.
      * @return mixed
@@ -186,6 +199,8 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Gets a list of photo counts for the given date ranges for the calling user.
+     *
+     * This method requires authentication.
      *
      * @link https://www.flickr.com/services/api/flickr.photos.getCounts.html
      * @param $dates string|string[]|null Array or comma-delimited list of unix timestamps, denoting the periods to
@@ -210,6 +225,8 @@ class PhotosApi extends ApiMethodGroup
     /**
      * Retrieve a list of EXIF/TIFF/GPS tags for a given photo. The calling user must have permission to view the photo.
      *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.getExif.html
      * @param $photoId string The ID of the photo to fetch information for.
      * @param $secret string|null The secret for the photo. If the correct secret is passed then permissions-checking is
@@ -224,6 +241,8 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Returns the list of people who have favorited a given photo.
+     *
+     * This method does not require authentication.
      *
      * @link https://www.flickr.com/services/api/flickr.photos.getFavorites.html
      * @param $photoId string The ID of the photo to fetch the favoriters list for.
@@ -241,6 +260,9 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Get information about a photo. The calling user must have permission to view the photo.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.getInfo.html
      * @param string $photoId The ID of the photo to get information for.
      * @param string $secret The secret for the photo. If the correct secret is passed then
@@ -255,10 +277,167 @@ class PhotosApi extends ApiMethodGroup
         return isset($response['photo']) ? $response['photo'] : false;
     }
 
-    //flickr.photos.getInfo
-    //flickr.photos.getNotInSet
-    //flickr.photos.getPerms
-    //flickr.photos.getPopular
+    /**
+     * Returns a list of your photos that are not part of any sets.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getNotInSet.html
+     * @param string $maxUploadDate Maximum upload date. Photos with an upload date
+     * less than or equal to this value will be returned. The date can be in the form
+     * of a unix timestamp or mysql datetime.
+     * @param string $minTakenDate Minimum taken date. Photos with an taken date
+     * greater than or equal to this value will be returned. The date can be in the
+     * form of a mysql datetime or unix timestamp.
+     * @param string $maxTakenDate Maximum taken date. Photos with an taken date less
+     * than or equal to this value will be returned. The date can be in the form of a
+     * mysql datetime or unix timestamp.
+     * @param string $privacyFilter Return photos only matching a certain privacy
+     * level. Valid values are:
+    <ul>
+    <li>1 public photos</li>
+    <li>2 private photos
+     * visible to friends</li>
+    <li>3 private photos visible to family</li>
+    <li>4
+     * private photos visible to friends &amp; family</li>
+    <li>5 completely private
+     * photos</li>
+    </ul>
+
+     * @param string $media Filter results by media type. Possible values are
+     * <code>all</code> (default), <code>photos</code> or <code>videos</code>
+     * @param string $minUploadDate Minimum upload date. Photos with an upload date
+     * greater than or equal to this value will be returned. The date can be in the
+     * form of a unix timestamp or mysql datetime.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getNotInSet(
+        $maxUploadDate = null,
+        $minTakenDate = null,
+        $maxTakenDate = null,
+        $privacyFilter = null,
+        $media = null,
+        $minUploadDate = null,
+        $extras = null,
+        $perPage = null,
+        $page = null
+    ) {
+        $params = [
+            'max_upload_date' => $maxUploadDate,
+            'min_taken_date' => $minTakenDate,
+            'max_taken_date' => $maxTakenDate,
+            'privacy_filter' => $privacyFilter,
+            'media' => $media,
+            'min_upload_date' => $minUploadDate,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.getNotInSet', $params);
+    }
+
+    /**
+     * Get permissions for a photo.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getPerms.html
+     * @param string $photoId The id of the photo to get permissions for.
+     * @return
+     */
+    public function getPerms($photoId)
+    {
+        $params = [
+            'photo_id' => $photoId
+        ];
+        return $this->flickr->request('flickr.photos.getPerms', $params);
+    }
+
+    /**
+     * Returns a list of popular photos
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getPopular.html
+     * @param string $userId The NSID of the user to get a galleries list for. If none
+     * is specified, the calling user is assumed.
+     * @param string $sort The sort order. One of <code>faves</code>,
+     * <code>views</code>, <code>comments</code> or <code>interesting</code>. Deafults
+     * to <code>interesting</code>.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getPopular($userId = null, $sort = null, $extras = null, $perPage = null, $page = null)
+    {
+        $params = [
+            'user_id' => $userId,
+            'sort' => $sort,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.getPopular', $params);
+    }
+
+    /**
+     * Returns a list of the latest public photos uploaded to flickr.
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getRecent.html
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getRecent($extras = [], $perPage = null, $page = null)
+    {
+        if (is_array($extras)) {
+            $extras = implode(",", $extras);
+        }
+        $args = ['extras' => $extras, 'per_page' => $perPage, 'page' => $page ];
+        $result = $this->flickr->request('flickr.photos.getRecent', $args);
+        return isset($result['photos']['photo']) ? $result['photos']['photo'] : false;
+    }
 
     /**
      * Get information about the sets to which the given photos belong.
@@ -307,8 +486,10 @@ class PhotosApi extends ApiMethodGroup
 
     /**
      * Returns the available sizes for a photo. The calling user must have permission to view the photo.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.getSizes.html
-     * @link https://www.flickr.com/services/api/misc.urls.html
      * @param int $photoId The ID of the photo to fetch size information for.
      * @return string[]|bool
      */
@@ -354,36 +535,269 @@ class PhotosApi extends ApiMethodGroup
     }
 
     /**
-     * Returns a list of the latest public photos uploaded to flickr.
-     * This method does not require authentication.
-     * @link https://www.flickr.com/services/api/flickr.photos.getRecent.html
-     * @param string[]|string $extras An array or comma-separated list of extra information to
-     * fetch for each returned record. Currently supported fields are: description, license,
-     * date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags,
-     * machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_q, url_m, url_n,
-     * url_z, url_c, url_l, and url_o. For details of the size suffixes,
-     * see https://www.flickr.com/services/api/misc.urls.html
-     * @param int $perPage Number of photos to return per page. If this argument is omitted,
-     * it defaults to 100. The maximum allowed value is 500.
-     * @param integer $page The page of results to return. If this argument is omitted, it defaults
-     * to 1.
-     * @return string[][]|bool
+     * Returns a list of your photos with no tags.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getUntagged.html
+     * @param string $minUploadDate Minimum upload date. Photos with an upload date
+     * greater than or equal to this value will be returned. The date can be in the
+     * form of a unix timestamp or mysql datetime.
+     * @param string $maxUploadDate Maximum upload date. Photos with an upload date
+     * less than or equal to this value will be returned. The date can be in the form
+     * of a unix timestamp or mysql datetime.
+     * @param string $minTakenDate Minimum taken date. Photos with an taken date
+     * greater than or equal to this value will be returned. The date should be in the
+     * form of a mysql datetime or unix timestamp.
+     * @param string $maxTakenDate Maximum taken date. Photos with an taken date less
+     * than or equal to this value will be returned. The date can be in the form of a
+     * mysql datetime or unix timestamp.
+     * @param string $privacyFilter Return photos only matching a certain privacy
+     * level. Valid values are: <ul> <li>1 public photos</li> <li>2 private photos
+     * visible to friends</li> <li>3 private photos visible to family</li> <li>4
+     * private photos visible to friends &amp; family</li> <li>5 completely private
+     * photos</li> </ul>
+     * @param string $media Filter results by media type. Possible values are
+     * <code>all</code> (default), <code>photos</code> or <code>videos</code>
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
      */
-    public function getRecent($extras = [], $perPage = null, $page = null)
-    {
-        if (is_array($extras)) {
-            $extras = implode(",", $extras);
-        }
-        $args = ['extras' => $extras, 'per_page' => $perPage, 'page' => $page ];
-        $result = $this->flickr->request('flickr.photos.getRecent', $args);
-        return isset($result['photos']['photo']) ? $result['photos']['photo'] : false;
+    public function getUntagged(
+        $minUploadDate = null,
+        $maxUploadDate = null,
+        $minTakenDate = null,
+        $maxTakenDate = null,
+        $privacyFilter = null,
+        $media = null,
+        $extras = null,
+        $perPage = null,
+        $page = null
+    ) {
+        $params = [
+            'min_upload_date' => $minUploadDate,
+            'max_upload_date' => $maxUploadDate,
+            'min_taken_date' => $minTakenDate,
+            'max_taken_date' => $maxTakenDate,
+            'privacy_filter' => $privacyFilter,
+            'media' => $media,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.getUntagged', $params);
     }
 
-    //flickr.photos.getUntagged
-    //flickr.photos.getWithGeoData
-    //flickr.photos.getWithoutGeoData
-    //flickr.photos.recentlyUpdated
-    //flickr.photos.removeTag
+    /**
+     * Returns a list of your geo-tagged photos.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getWithGeoData.html
+     * @param string $minUploadDate Minimum upload date. Photos with an upload date
+     * greater than or equal to this value will be returned. The date should be in the
+     * form of a unix timestamp.
+     * @param string $maxUploadDate Maximum upload date. Photos with an upload date
+     * less than or equal to this value will be returned. The date should be in the
+     * form of a unix timestamp.
+     * @param string $minTakenDate Minimum taken date. Photos with an taken date
+     * greater than or equal to this value will be returned. The date should be in the
+     * form of a mysql datetime.
+     * @param string $maxTakenDate Maximum taken date. Photos with an taken date less
+     * than or equal to this value will be returned. The date should be in the form of
+     * a mysql datetime.
+     * @param string $privacyFilter Return photos only matching a certain privacy
+     * level. Valid values are: <ul> <li>1 public photos</li> <li>2 private photos
+     * visible to friends</li> <li>3 private photos visible to family</li> <li>4
+     * private photos visible to friends & family</li> <li>5 completely private
+     * photos</li> </ul>
+     * @param string $sort The order in which to sort returned photos. Deafults to
+     * date-posted-desc. The possible values are: date-posted-asc, date-posted-desc,
+     * date-taken-asc, date-taken-desc, interestingness-desc, and interestingness-asc.
+     * @param string $media Filter results by media type. Possible values are
+     * <code>all</code> (default), <code>photos</code> or <code>videos</code>
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getWithGeoData(
+        $minUploadDate = null,
+        $maxUploadDate = null,
+        $minTakenDate = null,
+        $maxTakenDate = null,
+        $privacyFilter = null,
+        $sort = null,
+        $media = null,
+        $extras = null,
+        $perPage = null,
+        $page = null
+    ) {
+        $params = [
+            'min_upload_date' => $minUploadDate,
+            'max_upload_date' => $maxUploadDate,
+            'min_taken_date' => $minTakenDate,
+            'max_taken_date' => $maxTakenDate,
+            'privacy_filter' => $privacyFilter,
+            'sort' => $sort,
+            'media' => $media,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.getWithGeoData', $params);
+    }
+
+    /**
+     * Returns a list of your photos which haven't been geo-tagged.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html
+     * @param string $maxUploadDate Maximum upload date. Photos with an upload date
+     * less than or equal to this value will be returned. The date should be in the
+     * form of a unix timestamp.
+     * @param string $minTakenDate Minimum taken date. Photos with an taken date
+     * greater than or equal to this value will be returned. The date can be in the
+     * form of a mysql datetime or unix timestamp.
+     * @param string $maxTakenDate Maximum taken date. Photos with an taken date less
+     * than or equal to this value will be returned. The date can be in the form of a
+     * mysql datetime or unix timestamp.
+     * @param string $privacyFilter Return photos only matching a certain privacy
+     * level. Valid values are: <ul> <li>1 public photos</li> <li>2 private photos
+     * visible to friends</li> <li>3 private photos visible to family</li> <li>4
+     * private photos visible to friends &amp; family</li> <li>5 completely private
+     * photos</li> </ul>
+     * @param string $sort The order in which to sort returned photos. Deafults to
+     * date-posted-desc. The possible values are: date-posted-asc, date-posted-desc,
+     * date-taken-asc, date-taken-desc, interestingness-desc, and interestingness-asc.
+     * @param string $media Filter results by media type. Possible values are
+     * <code>all</code> (default), <code>photos</code> or <code>videos</code>
+     * @param string $minUploadDate Minimum upload date. Photos with an upload date
+     * greater than or equal to this value will be returned. The date can be in the
+     * form of a unix timestamp or mysql datetime.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getWithoutGeoData(
+        $maxUploadDate = null,
+        $minTakenDate = null,
+        $maxTakenDate = null,
+        $privacyFilter = null,
+        $sort = null,
+        $media = null,
+        $minUploadDate = null,
+        $extras = null,
+        $perPage = null,
+        $page = null
+    ) {
+        $params = [
+            'max_upload_date' => $maxUploadDate,
+            'min_taken_date' => $minTakenDate,
+            'max_taken_date' => $maxTakenDate,
+            'privacy_filter' => $privacyFilter,
+            'sort' => $sort,
+            'media' => $media,
+            'min_upload_date' => $minUploadDate,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.getWithoutGeoData', $params);
+    }
+
+    /**
+     * Return a list of your photos that have been recently created or which have
+     * been recently modified. Recently modified may mean that the photo's
+     * metadata (title, description, tags) may have been changed or a comment has been
+     * added (or just modified somehow).
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html
+     * @param string $minDate A Unix timestamp or any English textual datetime
+     * description indicating the date from which modifications should be compared.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function recentlyUpdated($minDate, $extras = null, $perPage = null, $page = null)
+    {
+        $params = [
+            'min_date' => $minDate,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.photos.recentlyUpdated', $params);
+    }
+
+    /**
+     * Remove a tag from a photo.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.removeTag.html
+     * @param string $tagId The tag to remove from the photo. This parameter should
+     * contain a tag id, as returned by <a
+     * href="/services/api/flickr.photos.getInfo.html">flickr.photos.getInfo</a>.
+     * @return
+     */
+    public function removeTag($tagId)
+    {
+        $params = [
+            'tag_id' => $tagId
+        ];
+        return $this->flickr->request('flickr.photos.removeTag', $params);
+    }
 
     /**
      * Return a list of photos matching some criteria. Only photos visible to the calling user will be returned. To
@@ -399,12 +813,33 @@ class PhotosApi extends ApiMethodGroup
         return isset($result['photos']) ? $result['photos'] : false;
     }
 
-    //flickr.photos.setContentType
+    /**
+     * Set the content type of a photo.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.setContentType.html
+     * @param string $photoId The id of the photo to set the content type of.
+     * @param string $contentType The content type of the photo. Must be one of: 1 for
+     * Photo, 2 for Screenshot, and 3 for Other.
+     * @return
+     */
+    public function setContentType($photoId, $contentType)
+    {
+        $params = [
+            'photo_id' => $photoId,
+            'content_type' => $contentType
+        ];
+        return $this->flickr->request('flickr.photos.setContentType', $params);
+    }
 
     /**
      * Set one or both of the dates for a photo.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.setDates.html
-     * $param int $photoId The ID of the photo to edit dates for.
+     * @param int $photoId The ID of the photo to edit dates for.
      * @param DateTime|null $dateTaken The date the photo was taken.
      * @param int $dateTakenGranularity The granularity of the $dateTaken parameter.
      * One of the Util::DATE_GRANULARITY_* constants.
@@ -432,7 +867,10 @@ class PhotosApi extends ApiMethodGroup
     }
 
     /**
-     * Set the main metadata for a photo.
+     * Set the meta information for a photo.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.setMeta.html
      * @param int $photoId The ID of the photo to set information for.
      * @param string $title The title for the photo. At least one of title or description must be set.
@@ -456,11 +894,67 @@ class PhotosApi extends ApiMethodGroup
         return isset($result['stat']) && $result['stat'] === 'ok';
     }
 
-    //flickr.photos.setPerms
-    //flickr.photos.setSafetyLevel
+    /**
+     * Set permissions for a photo.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.setPerms.html
+     * @param string $photoId The id of the photo to set permissions for.
+     * @param string $isPublic 1 to set the photo to public, 0 to set it to private.
+     * @param string $isFriend 1 to make the photo visible to friends when private, 0
+     * to not.
+     * @param string $isFamily 1 to make the photo visible to family when private, 0 to
+     * not.
+     * @param string $permComment who can add comments to the photo and it's notes. one
+     * of:<br /> <code>0</code>: nobody<br /> <code>1</code>: friends &amp; family<br
+     * /> <code>2</code>: contacts<br /> <code>3</code>: everybody
+     * @param string $permAddmeta who can add notes and tags to the photo. one of:<br
+     * /> <code>0</code>: nobody / just the owner<br /> <code>1</code>: friends &amp;
+     * family<br /> <code>2</code>: contacts<br /> <code>3</code>: everybody
+     * @return
+     */
+    public function setPerms($photoId, $isPublic, $isFriend, $isFamily, $permComment = null, $permAddmeta = null)
+    {
+        $params = [
+            'photo_id' => $photoId,
+            'is_public' => $isPublic,
+            'is_friend' => $isFriend,
+            'is_family' => $isFamily,
+            'perm_comment' => $permComment,
+            'perm_addmeta' => $permAddmeta
+        ];
+        return $this->flickr->request('flickr.photos.setPerms', $params);
+    }
+
+    /**
+     * Set the safety level of a photo.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html
+     * @param string $photoId The id of the photo to set the adultness of.
+     * @param string $safetyLevel The safety level of the photo.  Must be one of:  1
+     * for Safe, 2 for Moderate, and 3 for Restricted.
+     * @param string $hidden Whether or not to additionally hide the photo from public
+     * searches.  Must be either 1 for Yes or 0 for No.
+     * @return
+     */
+    public function setSafetyLevel($photoId, $safetyLevel = null, $hidden = null)
+    {
+        $params = [
+            'photo_id' => $photoId,
+            'safety_level' => $safetyLevel,
+            'hidden' => $hidden
+        ];
+        return $this->flickr->request('flickr.photos.setSafetyLevel', $params);
+    }
 
     /**
      * Set all of the tags for a photo, replacing any that are already there.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photos.setTags.html
      * @param int $photoId The photo ID.
      * @param string $tags All tags for the photo (as a single space-delimited string; tags with spaces in them should

@@ -7,9 +7,12 @@ class PeopleApi extends ApiMethodGroup
 
     /**
      * Return a user's NSID, given their email address
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.people.findByEmail.html
      * @param string $findEmail The email address of the user to find (may be primary or secondary).
-     * @return bool
+     * @return string|bool
      */
     public function findByEmail($findEmail)
     {
@@ -22,9 +25,12 @@ class PeopleApi extends ApiMethodGroup
 
     /**
      * Return a user's NSID, given their username.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.people.findByUsername.html
      * @param string $username The username of the user to lookup.
-     * @return bool
+     * @return string|bool
      */
     public function findByUsername($username)
     {
@@ -35,16 +41,56 @@ class PeopleApi extends ApiMethodGroup
         return isset($response['user']) ? $response['user'] : false;
     }
 
-    public function getGroups()
+    /**
+     * Returns the list of groups a user is a member of.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getGroups.html
+     * @param string $userId The NSID of the user to fetch groups for.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>privacy</code>,
+     * <code>throttle</code>, <code>restrictions</code>
+     * @return
+     */
+    public function getGroups($userId, $extras = null)
     {
+        $params = [
+            'user_id' => $userId,
+            'extras' => $extras
+        ];
+        return $this->flickr->request('flickr.people.getGroups', $params);
     }
 
-    public function getInfo()
+    /**
+     * Get information about a user.
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getInfo.html
+     * @param string $userId The NSID of the user to fetch information about.
+     * @return
+     */
+    public function getInfo($userId)
     {
+        $params = [
+            'user_id' => $userId
+        ];
+        return $this->flickr->request('flickr.people.getInfo', $params);
     }
 
+    /**
+     * Returns the photo and video limits that apply to the calling user account.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getLimits.html
+     *
+     * @return
+     */
     public function getLimits()
     {
+        return $this->flickr->request('flickr.people.getLimits');
     }
 
     /**
@@ -119,19 +165,115 @@ class PeopleApi extends ApiMethodGroup
         return isset($photos['photos']) ? $photos['photos'] : false;
     }
 
-    public function getPhotosOf()
+    /**
+     * Returns a list of photos containing a particular Flickr member.
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getPhotosOf.html
+     * @param string $userId The NSID of the user you want to find photos of. A value
+     * of "me" will search against photos of the calling user, for authenticated calls.
+     * @param string $ownerId An NSID of a Flickr member. This will restrict the list
+     * of photos to those taken by that member.
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>date_person_added</code>, <code>owner_name</code>,
+     * <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getPhotosOf($userId, $ownerId = null, $extras = null, $perPage = null, $page = null)
     {
+        $params = [
+            'user_id' => $userId,
+            'owner_id' => $ownerId,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page,
+        ];
+        return $this->flickr->request('flickr.people.getPhotosOf', $params);
     }
 
-    public function getPublicGroups()
+    /**
+     * Returns the list of public groups a user is a member of.
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getPublicGroups.html
+     * @param string $userId The NSID of the user to fetch groups for.
+     * @param string $invitationOnly Include public groups that require <a
+     * href="http://www.flickr.com/help/groups/#10">an invitation</a> or administrator
+     * approval to join.
+     * @return
+     */
+    public function getPublicGroups($userId, $invitationOnly = null)
     {
+        $params = [
+            'user_id' => $userId,
+            'invitation_only' => $invitationOnly
+        ];
+        return $this->flickr->request('flickr.people.getPublicGroups', $params);
     }
 
-    public function getPublicPhotos()
+    /**
+     * Get a list of public photos for the given user.
+     *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getPublicPhotos.html
+     * @param string $userId The NSID of the user who's photos to return.
+     * @param string $safeSearch Safe search setting:  <ul> <li>1 for safe.</li> <li>2
+     * for moderate.</li> <li>3 for restricted.</li> </ul>  (Please note: Un-authed
+     * calls can only see Safe content.)
+     * @param string $extras A comma-delimited list of extra information to fetch for
+     * each returned record. Currently supported fields are: <code>description</code>,
+     * <code>license</code>, <code>date_upload</code>, <code>date_taken</code>,
+     * <code>owner_name</code>, <code>icon_server</code>, <code>original_format</code>,
+     * <code>last_update</code>, <code>geo</code>, <code>tags</code>,
+     * <code>machine_tags</code>, <code>o_dims</code>, <code>views</code>,
+     * <code>media</code>, <code>path_alias</code>, <code>url_sq</code>,
+     * <code>url_t</code>, <code>url_s</code>, <code>url_q</code>, <code>url_m</code>,
+     * <code>url_n</code>, <code>url_z</code>, <code>url_c</code>, <code>url_l</code>,
+     * <code>url_o</code>
+     * @param string $perPage Number of photos to return per page. If this argument is
+     * omitted, it defaults to 100. The maximum allowed value is 500.
+     * @param string $page The page of results to return. If this argument is omitted,
+     * it defaults to 1.
+     * @return
+     */
+    public function getPublicPhotos($userId, $safeSearch = null, $extras = null, $perPage = null, $page = null)
     {
+        $params = [
+            'user_id' => $userId,
+            'safe_search' => $safeSearch,
+            'extras' => $extras,
+            'per_page' => $perPage,
+            'page' => $page
+        ];
+        return $this->flickr->request('flickr.people.getPublicPhotos', $params);
     }
 
+    /**
+     * Returns information for the calling user related to photo uploads.
+     *
+     * This method requires authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.people.getUploadStatus.html
+     *
+     * @return
+     */
     public function getUploadStatus()
     {
+        return $this->flickr->request('flickr.people.getUploadStatus');
     }
 }
