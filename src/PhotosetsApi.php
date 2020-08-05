@@ -7,6 +7,9 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Add a photo to the end of an existing photoset.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.addPhoto.html
      * @param int $photosetId The ID of the photoset to add a photo to.
      * @param int $photoId
@@ -60,6 +63,9 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Modify the meta-data for a photoset.
+     *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.editMeta.html
      * @param int $photosetId The ID of the photoset to modify.
      * @param string $title The new title for the photoset.
@@ -78,6 +84,7 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Modify the photos in a photoset. Use this method to add, remove and re-order photos.
+     * This method requires authentication.
      * @link https://www.flickr.com/services/api/flickr.photosets.editPhotos.html
      * @param int $photosetId The ID of the photoset to modify. The photoset must belong to the
      * calling user.
@@ -97,13 +104,16 @@ class PhotosetsApi extends ApiMethodGroup
         $args = [
             'photoset_id' => $photosetId,
             'primary_photo_id' => $primaryPhotoId,
-            'photo_ids' => $photoIds,
+            'photo_ids' => $photoIds
         ];
         return (bool)$this->flickr->request('flickr.photosets.editPhotos', $args, true);
     }
 
     /**
      * Returns next and previous photos for a photo in a set.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.getContext.html
      * @param int $photoId The ID of the photo to fetch the context for.
      * @param int $photosetId The ID of the photoset for which to fetch the photo's context.
@@ -120,6 +130,9 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Gets information about a photoset.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.getInfo.html
      * @param int $photosetId The ID of the photoset to fetch information for.
      * @param string $userId The ID of the owner of the set passed in $photosetId.
@@ -137,6 +150,9 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Returns the photosets belonging to the specified user.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.getList.html
      * @param string $userId The NSID of the user to get a photoset list for. If none is
      * specified, the calling user is assumed.
@@ -151,6 +167,11 @@ class PhotosetsApi extends ApiMethodGroup
      * @param string $photoIds A comma-separated list of photo ids. If specified, each returned set
      * will include a list of these photo IDs that are present in the set as
      * "has_requested_photos".
+     * @param string $sortGroups A comma-separated list of groups used to sort the output sets. If has_photo is present,
+     * any of the calling user's galleries containing photos referred to in photo_ids will be returned before other
+     * galleries. The order of the sort_groups will dictate the order that the groups are returned in. Only available if
+     * continuation is used. The resulting output will include a "sort_group" parameter indicating the sort_group that
+     * each set is part of, or null if not applicable.
      * @return mixed[]|bool
      */
     public function getList(
@@ -158,7 +179,8 @@ class PhotosetsApi extends ApiMethodGroup
         $page = null,
         $perPage = null,
         $primaryPhotoExtras = null,
-        $photoIds = null
+        $photoIds = null,
+        $sortGroups = null
     ) {
         $args = [
             'user_id' => $userId,
@@ -166,6 +188,7 @@ class PhotosetsApi extends ApiMethodGroup
             'per_page' => $perPage,
             'primary_photo_extras' => $primaryPhotoExtras,
             'photo_ids' => $photoIds,
+            'sort_groups' => $sortGroups,
         ];
         $response = $this->flickr->request('flickr.photosets.getList', $args);
         return isset($response['photosets']) ? $response['photosets'] : false;
@@ -174,6 +197,9 @@ class PhotosetsApi extends ApiMethodGroup
     /**
      * Get the list of photos in a set.
      *
+     * This method does not require authentication.
+     *
+     * @link https://www.flickr.com/services/api/flickr.photosets.getPhotos.html
      * @param int $photosetId The photoset ID.
      * @param string $userId The owner of the photo set.
      * @param string|string[] $extras Extra information to fetch for each photo. Comma-delimited string or array of
@@ -218,6 +244,8 @@ class PhotosetsApi extends ApiMethodGroup
     /**
      * Set the order of photosets for the calling user.
      *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.orderSets.html
      * @param $photosetIds string|string[] An array or comma-delimited list of photoset IDs, ordered with the set to
      * show first, first in the list. Any set IDs not given in the list will be set to appear at the end of the list,
@@ -236,6 +264,8 @@ class PhotosetsApi extends ApiMethodGroup
     /**
      * Remove a photo from a photoset.
      *
+     * This method requires authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.photosets.removePhoto.html
      * @param $photosetId string The ID of the photoset to remove a photo from.
      * @param $photoId string The ID of the photo to remove from the set.
@@ -250,6 +280,8 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Remove multiple photos from a photoset.
+     *
+     * This method requires authentication.
      *
      * @link https://www.flickr.com/services/api/flickr.photosets.removePhotos.html
      * @param $photosetId string The ID of the photoset to remove photos from.
@@ -268,7 +300,7 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Reorder some or all of the photos in a set.
-     *
+     * This method requires authentication.
      * @link https://www.flickr.com/services/api/flickr.photosets.reorderPhotos.html
      * @param $photosetId string The ID of the photoset to reorder. The photoset must belong to the calling user.
      * @param $photoIds string|string[] Ordered, comma-delimited list or array of photo IDs. Photos that are not in the
@@ -287,7 +319,7 @@ class PhotosetsApi extends ApiMethodGroup
 
     /**
      * Set the primary photo of a photoset.
-     *
+     * This method requires authentication.
      * @link https://www.flickr.com/services/api/flickr.photosets.setPrimaryPhoto.html
      * @param $photosetId string The ID of the photoset to set primary photo to.
      * @param $photoId string The ID of the photo to set as primary.

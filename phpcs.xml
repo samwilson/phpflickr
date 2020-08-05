@@ -6,6 +6,7 @@
     -->
 
     <file>./</file>
+    <exclude-pattern>./cache/*</exclude-pattern>
     <exclude-pattern>./vendor/*</exclude-pattern>
     <exclude-pattern>./docs/*</exclude-pattern>
     <exclude-pattern>./tests/config.php</exclude-pattern>

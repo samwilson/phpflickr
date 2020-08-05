@@ -5,4 +5,6 @@
 /examples/config.php
 /examples/cache/
 /tests/config.php
+/config.php
+/cache/
 

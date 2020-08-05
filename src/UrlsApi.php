@@ -75,8 +75,11 @@ class UrlsApi extends ApiMethodGroup
 
     /**
      * Returns the URL to a group's page.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.urls.getGroup.html
-     * @param string $groupId
+     * @param string $groupId The NSID of the group to fetch the URL for.
      * @return string|bool
      */
     public function getGroup($groupId)
@@ -87,8 +90,11 @@ class UrlsApi extends ApiMethodGroup
 
     /**
      * Returns the URL to a user's photos.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.urls.getUserPhotos.html
-     * @param string $userId
+     * @param string $userId The NSID of the user to fetch the URL for. If omitted, the calling user is assumed.
      * @return string|bool
      */
     public function getUserPhotos($userId = null)
@@ -98,9 +104,12 @@ class UrlsApi extends ApiMethodGroup
     }
 
     /**
-     * Returns the URL of a user's profile.
+     * Returns the URL to a user's profile.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.urls.getUserProfile.html
-     * @param null $userId
+     * @param string $userId The NSID of the user to fetch the URL for. If omitted, the calling user is assumed.
      * @return string|bool
      */
     public function getUserProfile($userId = null)
@@ -111,8 +120,9 @@ class UrlsApi extends ApiMethodGroup
 
     /**
      * Returns gallery info given a gallery's URL.
+     * This method does not require authentication.
      * @link https://www.flickr.com/services/api/flickr.urls.lookupGallery.html
-     * @param string $url
+     * @param string $url The gallery's URL.
      * @return string|bool
      */
     public function lookupGallery($url)
@@ -122,6 +132,9 @@ class UrlsApi extends ApiMethodGroup
 
     /**
      * Returns a group NSID, given the URL to a group's page or photo pool.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.urls.lookupGroup.html
      * @param string $url The URL to the group's page or photo pool.
      * @return string|bool
@@ -134,8 +147,11 @@ class UrlsApi extends ApiMethodGroup
 
     /**
      * Returns a user NSID, given the url to a user's photos or profile.
+     *
+     * This method does not require authentication.
+     *
      * @link https://www.flickr.com/services/api/flickr.urls.lookupUser.html
-     * @param string $url The url to the user's profile or photos page.
+     * @param string $url The URL to the user's profile or photos page.
      * @return string|bool
      */
     public function lookupUser($url)

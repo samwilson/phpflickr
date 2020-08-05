@@ -11,6 +11,7 @@ class TestApi extends ApiMethodGroup
      * A testing method which echos all request parameters back in the response.
      * (Note that this method name does not follow normal PhpFlickr nomenclature,
      * due to 'echo' being a reserved word in PHP.)
+     * This method does not require authentication.
      * @link https://www.flickr.com/services/api/flickr.test.echo.html
      * @param array $args
      * @return string[]|bool
@@ -22,6 +23,7 @@ class TestApi extends ApiMethodGroup
 
     /**
      * A testing method which checks if the caller is logged in then returns their details.
+     * This method requires authentication.
      * @link https://www.flickr.com/services/api/flickr.test.login.html
      * @return string[]|bool An array with 'id', 'username' and 'path_alias' keys,
      * or false if unable to log in.
