@@ -2406,7 +2406,15 @@ class PhpFlickr
         return new PhotosGeoApi($this);
     }
 
+    /**
+     * @deprecated
+     */
     public function photoLicenses()
+    {
+        return $this->photosLicenses();
+    }
+
+    public function photosLicenses()
     {
         return new PhotosLicensesApi($this);
     }
