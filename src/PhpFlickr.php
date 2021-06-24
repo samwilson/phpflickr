@@ -1373,7 +1373,7 @@ class PhpFlickr
      */
     public function photos_search($args = [])
     {
-        return $this->photos()->search();
+        return $this->photos()->search($args);
     }
 
     /**
