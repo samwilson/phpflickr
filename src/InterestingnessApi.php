@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class InterestingnessApi extends ApiMethodGroup
 {
-
     /**
      * Returns the list of interesting photos for the most recent day or a
      * user-specified date.

@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class GroupsPoolsApi extends ApiMethodGroup
 {
-
     /**
      * Add a photo to a group's pool.
      *

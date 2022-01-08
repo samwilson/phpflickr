@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class ReflectionApi extends ApiMethodGroup
 {
-
     /**
      * Returns information for a given flickr API method.
      *

@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class BlogsApi extends ApiMethodGroup
 {
-
     /**
      * Get a list of configured blogs for the calling user.
      *

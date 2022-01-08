@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosUploadApi extends ApiMethodGroup
 {
-
     /**
      * Checks the status of one or more asynchronous photo upload tickets.
      *

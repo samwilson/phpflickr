@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class GalleriesApi extends ApiMethodGroup
 {
-
     /**
      * Add a photo to a gallery.
      *

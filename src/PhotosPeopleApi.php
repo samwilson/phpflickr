@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosPeopleApi extends ApiMethodGroup
 {
-
     /**
      * Add a person to a photo. Coordinates and sizes of boxes are optional; they are
      * measured in pixels, based on the 500px image size shown on individual photo

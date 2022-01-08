@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class MachinetagsApi extends ApiMethodGroup
 {
-
     /**
      * Return a list of unique namespaces, optionally limited by a given predicate, in
      * alphabetical order.

@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class Util
 {
-
     const BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
     const PRIVACY_PUBLIC = 1;
     const PRIVACY_FRIENDS = 2;

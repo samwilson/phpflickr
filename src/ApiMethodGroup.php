@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 abstract class ApiMethodGroup
 {
-
     /** @var PhpFlickr */
     protected $flickr;
 

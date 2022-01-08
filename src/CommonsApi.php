@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class CommonsApi extends ApiMethodGroup
 {
-
     /**
      * Retrieves a list of the current Commons institutions.
      *

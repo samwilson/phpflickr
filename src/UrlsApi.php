@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class UrlsApi extends ApiMethodGroup
 {
-
     /**
      * Get the URL for a photo's image at a given size.
      * @link https://www.flickr.com/services/api/misc.urls.html

@@ -8,7 +8,6 @@ use Samwilson\PhpFlickr\Tests\TestCase;
 
 class TestApiTest extends TestCase
 {
-
     /**
      * Echoing with an invalid key should return an error.
      */

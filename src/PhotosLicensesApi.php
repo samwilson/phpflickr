@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosLicensesApi extends ApiMethodGroup
 {
-
     /**
      * Fetches a list of available photo licenses for Flickr.
      * This method does not require authentication.

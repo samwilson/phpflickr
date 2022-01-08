@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PhotosTransformApi extends ApiMethodGroup
 {
-
     /**
      * Rotate a photo.
      *

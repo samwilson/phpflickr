@@ -13,7 +13,6 @@ use OAuth\OAuth1\Signature\SignatureInterface;
 
 class PhpFlickrService extends Flickr
 {
-
     /** @var string The base URL, with no trailing slash. */
     private static $baseUrl = 'https://api.flickr.com/services';
 

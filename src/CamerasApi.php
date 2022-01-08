@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class CamerasApi extends ApiMethodGroup
 {
-
     /**
      * Retrieve all the models for a given camera brand.
      *

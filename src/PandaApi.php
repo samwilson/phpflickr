@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PandaApi extends ApiMethodGroup
 {
-
     /**
      * Return a list of <a href="http://www.flickr.com/explore/panda">Flickr
      * pandas</a>, from whom you can request photos using the <a

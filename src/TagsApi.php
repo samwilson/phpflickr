@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class TagsApi extends ApiMethodGroup
 {
-
     /**
      * Returns the first 24 photos for a given tag cluster
      *

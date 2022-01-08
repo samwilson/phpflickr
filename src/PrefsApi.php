@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PrefsApi extends ApiMethodGroup
 {
-
     /**
      * Returns the default content type preference for the user.
      *

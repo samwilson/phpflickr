@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class PushApi extends ApiMethodGroup
 {
-
     /**
      * Returns a list of the subscriptions for the logged-in user. This method is experimental and may change.
      *

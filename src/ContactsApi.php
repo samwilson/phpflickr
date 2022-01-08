@@ -4,7 +4,6 @@ namespace Samwilson\PhpFlickr;
 
 class ContactsApi extends ApiMethodGroup
 {
-
     /**
      * Get a list of contacts for the calling user.
      *
