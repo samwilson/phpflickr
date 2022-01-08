@@ -76,6 +76,9 @@ class PhotosApiTest extends TestCase
 
         $photoInfo = $flickr->photos()->getInfo($testPhotoId);
         static::assertCount(3, $photoInfo['tags']['tag']);
+
+        // Clean up.
+        $flickr->photos()->delete($testPhotoId);
     }
 
     public function testSearch()

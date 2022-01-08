@@ -86,7 +86,8 @@ class PhotosApi extends ApiMethodGroup
      */
     public function delete($photoId)
     {
-        return (bool)$this->flickr->request('flickr.photos.delete', ['photo_id' => $photoId], true);
+        $result = $this->flickr->request('flickr.photos.delete', ['photo_id' => $photoId], true);
+        return $result['stat'] === 'ok';
     }
 
     /**

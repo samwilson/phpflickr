@@ -27,6 +27,7 @@ class TestApiTest extends TestCase
     {
         $flickr = $this->getFlickr();
         $echo = $flickr->test()->testEcho(['foo' => 'bar']);
-        static::assertArraySubset(['foo' => 'bar', 'method' => 'flickr.test.echo'], $echo);
+        $this->assertSame('bar', $echo['foo']);
+        $this->assertSame('flickr.test.echo', $echo['method']);
     }
 }

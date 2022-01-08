@@ -8,7 +8,7 @@ class PhotosetsApiTest extends TestCase
 {
     protected $testPhotoId;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $flickr = $this->getFlickr(true);
@@ -17,9 +17,9 @@ class PhotosetsApiTest extends TestCase
         $this->testPhotoId = $uploaded['photoid'];
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
-        $this->getFlickr(true)->photos_delete($this->testPhotoId);
+        $this->getFlickr(true)->photos()->delete($this->testPhotoId);
     }
 
     public function testCreate()
