@@ -26,7 +26,12 @@ class TestApiTest extends TestCase
     public function testEcho()
     {
         $flickr = $this->getFlickr();
+
         $echo = $flickr->test()->testEcho(['foo' => 'bar']);
-        static::assertArraySubset(['foo' => 'bar', 'method' => 'flickr.test.echo'], $echo);
+
+        $this->assertContains(
+            ['foo' => 'bar', 'method' => 'flickr.test.echo'],
+            $echo
+        );
     }
 }
