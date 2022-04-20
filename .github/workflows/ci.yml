@@ -27,11 +27,20 @@ jobs:
       run: |
         composer install
 
-    - name: Test
+    - name: Create env file
+      run: |
+        touch .env
+        echo FLICKR_API_KEY=${FLICKR_API_KEY} > .env
+        echo FLICKR_API_SECRET=${FLICKR_API_SECRET} > .env
+        echo FLICKR_ACCESS_TOKEN=${FLICKR_ACCESS_TOKEN} > .env
+        echo FLICKR_ACCESS_SECRET=${FLICKR_ACCESS_SECRET} > .env
+        cat .env
       env:
         FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
         FLICKR_API_SECRET: ${{ secrets.FLICKR_API_SECRET }}
         FLICKR_ACCESS_TOKEN: ${{ secrets.FLICKR_ACCESS_TOKEN }}
         FLICKR_ACCESS_SECRET: ${{ secrets.FLICKR_ACCESS_SECRET }}
+
+    - name: Test
       run: |
         composer test
