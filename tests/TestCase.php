@@ -17,7 +17,7 @@ abstract class TestCase extends PhpUnitTestCase
      * available in tests/config.php.
      * @return PhpFlickr
      */
-    public function getFlickr($authenticate = false)
+    public function getFlickr(bool $authenticate = false): PhpFlickr
     {
         if ($this->flickr instanceof PhpFlickr) {
             return $this->flickr;

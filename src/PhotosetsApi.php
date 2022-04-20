@@ -35,7 +35,7 @@ class PhotosetsApi extends ApiMethodGroup
      * @param string $description A description of the photoset. May contain limited HTML.
      * @param int $primaryPhotoId The ID of the photo to represent this set. The photo must belong
      * to the calling user.
-     * @return bool
+     * @return bool|mixed[]
      */
     public function create($title, $description, $primaryPhotoId)
     {
