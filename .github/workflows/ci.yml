@@ -41,6 +41,11 @@ jobs:
         FLICKR_ACCESS_TOKEN: ${{ secrets.FLICKR_ACCESS_TOKEN }}
         FLICKR_ACCESS_SECRET: ${{ secrets.FLICKR_ACCESS_SECRET }}
 
+    - name: Dump FLICKR_API_KEY
+      env:
+        FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+      run: echo "$FLICKR_API_KEY"
+
     - name: Test
       run: |
         composer test
