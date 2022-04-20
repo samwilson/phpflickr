@@ -31,7 +31,6 @@
 	"scripts": {
 		"test": [
 			"composer validate",
-			"parallel-lint . --exclude node_modules --exclude vendor",
 			"minus-x check . -q",
 			"phpcs -sp",
 			"phpunit",
