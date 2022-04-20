@@ -15,7 +15,7 @@ class TestApi extends ApiMethodGroup
      * @param array $args
      * @return string[]|bool
      */
-    public function testEcho($args = [])
+    public function testEcho(array $args = [])
     {
         return $this->flickr->request('flickr.test.echo', $args, true);
     }

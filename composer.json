@@ -19,7 +19,7 @@
 		"ext-json": "*",
 		"ext-libxml": "*",
 		"ext-simplexml": "*",
-		"lusitanian/oauth": "^0.8",
+		"lusitanian/oauth": "dev-master#ee5a83310c6014b6cc07ac0610ec9d67ba452664 as 0.8.12",
 		"psr/cache": "^1.0"
 	},
 	"require-dev": {
