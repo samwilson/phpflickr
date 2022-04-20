@@ -28,7 +28,7 @@ abstract class TestCase extends PhpUnitTestCase
         $apiSecret = getenv('FLICKR_API_SECRET');
         $accessToken = getenv('FLICKR_ACCESS_TOKEN');
         $accessTokenSecret = getenv('FLICKR_ACCESS_SECRET');
-        if (empty($apiKey)) {
+        if (empty($apiKey) && file_exists(__DIR__ . '/config.php')) {
             require __DIR__ . '/config.php';
         }
         if (empty($apiKey)) {
