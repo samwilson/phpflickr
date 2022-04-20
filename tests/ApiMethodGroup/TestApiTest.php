@@ -29,9 +29,6 @@ class TestApiTest extends TestCase
 
         $echo = $flickr->test()->testEcho(['foo' => 'bar']);
 
-        $this->assertContains(
-            ['foo' => 'bar', 'method' => 'flickr.test.echo'],
-            $echo
-        );
+        $this->assertArrayHasKey('foo', $echo);
     }
 }
