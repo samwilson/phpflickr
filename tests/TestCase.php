@@ -17,7 +17,7 @@ abstract class TestCase extends PhpUnitTestCase
      * available in tests/config.php.
      * @return PhpFlickr
      */
-    public function getFlickr($authenticate = false)
+    public function getFlickr(bool $authenticate = false): PhpFlickr
     {
         if ($this->flickr instanceof PhpFlickr) {
             return $this->flickr;
@@ -28,7 +28,7 @@ abstract class TestCase extends PhpUnitTestCase
         $apiSecret = getenv('FLICKR_API_SECRET');
         $accessToken = getenv('FLICKR_ACCESS_TOKEN');
         $accessTokenSecret = getenv('FLICKR_ACCESS_SECRET');
-        if (empty($apiKey)) {
+        if (empty($apiKey) && file_exists(__DIR__ . '/config.php')) {
             require __DIR__ . '/config.php';
         }
         if (empty($apiKey)) {
