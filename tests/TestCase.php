@@ -44,6 +44,12 @@ abstract class TestCase extends PhpUnitTestCase
             $token->setAccessTokenSecret($accessTokenSecret);
             $this->flickr->getOauthTokenStorage()->storeAccessToken('Flickr', $token);
         }
+        if ($authenticate && empty($accessToken)) {
+            static::markTestSkipped(
+                'Access token required for this test. '
+                . 'Please use examples/get_auth_token.php to get one to add to tests/config.php'
+            );
+        }
 
         return $this->flickr;
     }
