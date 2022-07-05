@@ -27,7 +27,11 @@ class TestApiTest extends TestCase
     {
         $flickr = $this->getFlickr();
 
-        $echo = $flickr->test()->testEcho(['foo' => 'bar']);
+        try {
+            $echo = $flickr->test()->testEcho(['foo' => 'bar']);
+        } catch (FlickrException $e) {
+            static::markTestSkipped($e->getMessage());
+        }
 
         $this->assertArrayHasKey('foo', $echo);
     }
