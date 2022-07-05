@@ -81,13 +81,29 @@ class PhotosApiTest extends TestCase
     public function testSearch()
     {
         $flickr = $this->getFlickr(true);
-        $testFilename = dirname(__DIR__) . '/../examples/Agateware_Example.JPG';
-        $photo = $flickr->uploader()->upload($testFilename);
-        $search = $flickr->photos()->search([
+        $testTitle = uniqid('PhpFlickr search test ');
+        $searchParams = [
             'user_id' => 'me',
-            'text' => 'Agateware_Example',
-        ]);
-        static::assertGreaterThan(1, count($search['photo']));
+            'text' => $testTitle,
+        ];
+
+        // Make sure there are no search results to start with.
+        $search = $flickr->photos()->search($searchParams);
+        static::assertCount(0, $search['photo']);
+
+        // Upload a test photo.
+        $testFilename = dirname(__DIR__) . '/../examples/Agateware_Example.JPG';
+        $photo = $flickr->uploader()->upload($testFilename, $testTitle, null, null, true, null, null, null, 1);
+
+        // Look for search results, looping because it's a new file and can take time to be indexed.
+        for ($i = 0; $i < 15; $i++) {
+            sleep(1);
+            $search = $flickr->photos()->search($searchParams);
+            if (count($search['photo']) > 0) {
+                break;
+            }
+        }
+        static::assertGreaterThanOrEqual(1, count($search['photo']));
 
         // Clean up.
         $flickr->photos()->delete($photo['photoid']);
