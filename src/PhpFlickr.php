@@ -52,23 +52,15 @@ class PhpFlickr
     /** @var string[]|bool */
     protected $parsed_response;
 
-    /** @var CacheItemPoolInterface */
+    /** @var CacheItemPoolInterface|null */
     protected $cachePool;
 
     /** @var int|DateInterval */
     protected $cacheDefaultExpiry = 600;
 
-    protected $cache = false;
-    protected $cache_db = null;
-    protected $cache_table = null;
-    protected $cache_dir = null;
-    protected $cache_expire = null;
-
     protected $token;
 
     protected $custom_post = null;
-    protected $custom_cache_get = null;
-    protected $custom_cache_set = null;
 
     /** @var string The Flickr-API service to connect to; must be either 'flickr' or '23'. */
     protected $service;
@@ -81,19 +73,6 @@ class PhpFlickr
 
     /** @var TokenStorageInterface */
     protected $oauthTokenStorage;
-
-    /**
-     * When your database cache table hits this many rows, a cleanup
-     * will occur to get rid of all of the old rows and cleanup the
-     * garbage in the table.  For most personal apps, 1000 rows should
-     * be more than enough.  If your site gets hit by a lot of traffic
-     * or you have a lot of disk space to spare, bump this number up.
-     * You should try to set it high enough that the cleanup only
-     * happens every once in a while, so this will depend on the growth
-     * of your table.
-     * @var integer
-     */
-    protected $max_cache_rows = 1000;
 
     /**
      * PhpFlickr constructor.
@@ -132,7 +111,7 @@ class PhpFlickr
      */
     public function getCached($request)
     {
-        //Checks the database or filesystem for a cached result to the request.
+        //Checks for a cached result to the request.
         //If there is no cache result, it returns a value of false. If it finds one,
         //it returns the unparsed XML.
         unset($request['api_sig']);
@@ -152,21 +131,6 @@ class PhpFlickr
             } else {
                 return false;
             }
-        } elseif ($this->cache == 'db') {
-            $result = mysqli_query($this->cache_db, "SELECT response FROM " . $this->cache_table . " WHERE request = '" . $cacheKey . "' AND CURRENT_TIMESTAMP < expiration");
-            if ($result && mysqli_num_rows($result)) {
-                $result = mysqli_fetch_assoc($result);
-                return urldecode($result['response']);
-            } else {
-                return false;
-            }
-        } elseif ($this->cache == 'fs') {
-            $file = $this->cache_dir . '/' . $cacheKey . '.cache';
-            if (file_exists($file)) {
-                return file_get_contents($file);
-            }
-        } elseif ($this->cache == 'custom') {
-            return call_user_func_array($this->custom_cache_get, array($cacheKey));
         }
         return false;
     }
@@ -175,9 +139,9 @@ class PhpFlickr
      * Cache a request's response.
      * @param string[] $request API request parameters.
      * @param mixed $response The value to cache.
-     * @return bool|int|mixed|\mysqli_result
+     * @return bool Whether the cache was saved or not.
      */
-    public function cache($request, $response)
+    protected function cache($request, $response)
     {
         //Caches the unparsed response of a request.
         unset($request['api_sig']);
@@ -194,27 +158,6 @@ class PhpFlickr
             $item->set($response);
             $item->expiresAfter($this->cacheDefaultExpiry);
             return $this->cachePool->save($item);
-        } elseif ($this->cache == 'db') {
-            $response = urlencode($response);
-            $sql = 'INSERT INTO '.$this->cache_table.' (request, response, expiration) 
-						VALUES (\''.$cacheKey.'\', \''.$response.'\', TIMESTAMPADD(SECOND,'.$this->cache_expire.',CURRENT_TIMESTAMP))
-						ON DUPLICATE KEY UPDATE response=\''.$response.'\', 
-						expiration=TIMESTAMPADD(SECOND,'.$this->cache_expire.',CURRENT_TIMESTAMP) ';
-
-            $result = mysqli_query($this->cache_db, $sql);
-            if (!$result) {
-                echo mysqli_error($this->cache_db);
-            }
-
-            return $result;
-        } elseif ($this->cache == "fs") {
-            $file = $this->cache_dir . "/" . $cacheKey . ".cache";
-            $fstream = fopen($file, "w");
-            $result = fwrite($fstream, $response);
-            fclose($fstream);
-            return $result;
-        } elseif ($this->cache == "custom") {
-            return call_user_func_array($this->custom_cache_set, array($cacheKey, $response, $this->cache_expire));
         }
         return false;
     }
@@ -235,14 +178,14 @@ class PhpFlickr
         }
 
         // See if there's a cached response.
-        $cacheKey = array_merge([$command], $args);
-        $this->response = $this->getCached($cacheKey);
+        $request = array_merge([$command], $args);
+        $this->response = $this->getCached($request);
         if (!($this->response) || $nocache) {
             $args = array_filter($args);
             $oauthService = $this->getOauthService();
             $this->response = $oauthService->requestJson($command, 'POST', $args);
             if (!$nocache) {
-                $this->cache($cacheKey, $this->response);
+                $this->cache($request, $this->response);
             }
         }
 
