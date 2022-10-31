@@ -4,16 +4,16 @@ namespace Samwilson\PhpFlickr;
 
 class Util
 {
-    const BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
-    const PRIVACY_PUBLIC = 1;
-    const PRIVACY_FRIENDS = 2;
-    const PRIVACY_FAMILY = 3;
-    const PRIVACY_FRIENDS_FAMILY = 4;
-    const PRIVACY_PRIVATE = 5;
-    const DATE_GRANULARITY_EXACT = 0;
-    const DATE_GRANULARITY_MONTH = 4;
-    const DATE_GRANULARITY_YEAR = 6;
-    const DATE_GRANULARITY_CIRCA = 8;
+    public const BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+    public const PRIVACY_PUBLIC = 1;
+    public const PRIVACY_FRIENDS = 2;
+    public const PRIVACY_FAMILY = 3;
+    public const PRIVACY_FRIENDS_FAMILY = 4;
+    public const PRIVACY_PRIVATE = 5;
+    public const DATE_GRANULARITY_EXACT = 0;
+    public const DATE_GRANULARITY_MONTH = 4;
+    public const DATE_GRANULARITY_YEAR = 6;
+    public const DATE_GRANULARITY_CIRCA = 8;
 
     /**
      * Encode a photo ID to Flickr's short-URL base-58 system.

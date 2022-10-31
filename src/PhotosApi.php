@@ -7,43 +7,43 @@ use DateTime;
 class PhotosApi extends ApiMethodGroup
 {
     /** Size s: small square 75x75 */
-    const SIZE_SMALL_SQUARE = 's';
+    public const SIZE_SMALL_SQUARE = 's';
 
     /** Size q: large square 150x150 */
-    const SIZE_LARGE_SQUARE = 'q';
+    public const SIZE_LARGE_SQUARE = 'q';
 
     /** Size t: 100 on longest side */
-    const SIZE_THUMBNAIL = 't';
+    public const SIZE_THUMBNAIL = 't';
 
     /** Size m: 240 on longest side */
-    const SIZE_SMALL_240 = 'm';
+    public const SIZE_SMALL_240 = 'm';
 
     /** Size n: 320 on longest side */
-    const SIZE_SMALL_320 = 'n';
+    public const SIZE_SMALL_320 = 'n';
 
     /** Size -: 500 on longest side */
-    const SIZE_MEDIUM_500 = '-';
+    public const SIZE_MEDIUM_500 = '-';
 
     /** Size z: 640 on longest side */
-    const SIZE_MEDIUM_640 = 'z';
+    public const SIZE_MEDIUM_640 = 'z';
 
     /** Size c: 800 on longest side. Only exist after 1 March 2012. */
-    const SIZE_MEDIUM_800 = 'c';
+    public const SIZE_MEDIUM_800 = 'c';
 
     /**
      * Size b: 1024 on longest side. Before May 25th 2010 large photos only exist for very large
      * original images.
      */
-    const SIZE_LARGE_1024 = 'b';
+    public const SIZE_LARGE_1024 = 'b';
 
     /** Size h: 1600 on longest side. Only exist after 1 March 2012. */
-    const SIZE_LARGE_1600 = 'h';
+    public const SIZE_LARGE_1600 = 'h';
 
     /** Size k: 2048 on longest side. Only exist after 1 March 2012. */
-    const SIZE_LARGE_2048 = 'k';
+    public const SIZE_LARGE_2048 = 'k';
 
     /** Size o: original image, either a jpg, gif or png, depending on source format. */
-    const SIZE_ORIGINAL = 'o';
+    public const SIZE_ORIGINAL = 'o';
 
     /**
      * Add tags to a photo.
