@@ -1,4 +1,5 @@
 <?php
+
 /* phpFlickr
  * Written by Dan Coulter (dan@dancoulter.com).
  * Forked by Sam Wilson, 2017.
@@ -39,14 +40,15 @@ use Samwilson\PhpFlickr\Oauth\PhpFlickrService;
 
 class PhpFlickr
 {
+    /** @param string */
     protected $api_key;
+
+    /** @param string|null */
     protected $secret;
-    protected $rest_endpoint = 'https://api.flickr.com/services/rest/';
 
     /** @var string The base URL of a Flickr API proxy service. */
     protected $proxyBaseUrl;
 
-    protected $req;
     protected $response;
 
     /** @var string[]|bool */
@@ -59,8 +61,6 @@ class PhpFlickr
     protected $cacheDefaultExpiry = 600;
 
     protected $token;
-
-    protected $custom_post = null;
 
     /** @var string The Flickr-API service to connect to; must be either 'flickr' or '23'. */
     protected $service;
@@ -75,12 +75,10 @@ class PhpFlickr
     protected $oauthTokenStorage;
 
     /**
-     * PhpFlickr constructor.
-     * @param $apiKey
-     * @param null $secret
-     * @param bool $dieOnError Deprecated, does nothing.
+     * @param string $apiKey
+     * @param string|null $secret
      */
-    public function __construct($apiKey, $secret = null, $dieOnError = false)
+    public function __construct(string $apiKey, string $secret = null)
     {
         $this->api_key = $apiKey;
         $this->secret = $secret;
@@ -191,7 +189,7 @@ class PhpFlickr
 
         $jsonResponse = json_decode($this->response, true);
         if (null === $jsonResponse) {
-            throw new FlickrException("Unable to decode Flickr response to $command request: ".$this->response);
+            throw new FlickrException("Unable to decode Flickr response to $command request: " . $this->response);
         }
         $this->parsed_response = $this->cleanTextNodes($jsonResponse);
         if ($this->parsed_response['stat'] === 'fail') {
@@ -325,7 +323,8 @@ class PhpFlickr
      * @return TokenStorageInterface
      * @throws FlickrException If the token storage has not been set yet.
      */
-    public function getOauthTokenStorage() {
+    public function getOauthTokenStorage()
+    {
         if (!$this->oauthTokenStorage instanceof TokenStorageInterface) {
             // If no storage has yet been set, create an in-memory one with an empty token.
             // This will be suitable for un-authenticated API calls.
