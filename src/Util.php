@@ -42,7 +42,7 @@ class Util
     /**
      * Decode a photo ID from Flickr's short-URL base-58 system.
      * @link https://www.flickr.com/groups/api/discuss/72157616713786392/
-     * @param int $num
+     * @param string $num
      * @return bool|int
      */
     public static function base58decode($num)
