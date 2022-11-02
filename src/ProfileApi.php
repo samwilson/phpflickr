@@ -11,7 +11,7 @@ class ProfileApi extends ApiMethodGroup
      *
      * @link https://www.flickr.com/services/api/flickr.profile.getProfile.html
      * @param string $userId The NSID of the user to fetch profile information for.
-     * @return
+     * @return array
      */
     public function getProfile($userId)
     {

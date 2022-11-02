@@ -104,7 +104,7 @@ class PhpFlickr
 
     /**
      * Get a cached request.
-     * @param string[] Array of request parameters ('api_sig' will be discarded).
+     * @param string[] $request Array of request parameters ('api_sig' will be discarded).
      * @return string[]
      */
     public function getCached($request)
