@@ -41,7 +41,7 @@ $recent = $phpFlickr->photos()->getRecent([], 10);
 // Display a list of photo titles.
 echo '<ul>';
 foreach ($recent as $photo) {
-    $owner = $phpFlickr->people_getInfo($photo['owner']);
+    $owner = $phpFlickr->people()->getInfo($photo['owner']);
     $url = 'https://flic.kr/p/' . \Samwilson\PhpFlickr\Util::base58encode($photo['id']);
     echo "<li> Photo: <a href='$url'>" . $photo['title'] . "</a>";
     echo "; Owner: ";

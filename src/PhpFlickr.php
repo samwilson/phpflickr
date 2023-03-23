@@ -23,11 +23,8 @@
 namespace Samwilson\PhpFlickr;
 
 use DateInterval;
-use DateTime;
-use Exception;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\CurlClient;
-use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Storage\Memory;
 use OAuth\Common\Storage\TokenStorageInterface;

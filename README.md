@@ -167,7 +167,7 @@ Now, you can pass the storage into PhpFlickr, and start making requests:
 
 ```php
 $flickr->setOauthStorage($storage);
-$recent = $phpFlickr->photos_getContactsPhotos();
+$recent = $phpFlickr->photos()->getContactsPhotos();
 ```
 
 See the [Usage section](#usage) above for more details on the request methods,
