@@ -40,6 +40,9 @@ use Samwilson\PhpFlickr\Oauth\PhpFlickrService;
 
 class PhpFlickr
 {
+    /** PhpFlickr version. */
+    public const VERSION = '5.1.0';
+
     /** @param string */
     protected $api_key;
 
@@ -74,6 +77,9 @@ class PhpFlickr
     /** @var TokenStorageInterface */
     protected $oauthTokenStorage;
 
+    /** @var string The User Agent string to send to the Flickr API. */
+    protected $userAgent;
+
     /**
      * @param string $apiKey
      * @param string|null $secret
@@ -82,6 +88,7 @@ class PhpFlickr
     {
         $this->api_key = $apiKey;
         $this->secret = $secret;
+        $this->userAgent = 'PhpFlickr/' . self::VERSION . ' https://github.com/samwilson/phpflickr';
     }
 
     /**
@@ -161,6 +168,24 @@ class PhpFlickr
     }
 
     /**
+     * Set the User Agent string that will be sent to Flickr.
+     * Should be of the form `product/product-version comment`.
+     * @param string $userAgent
+     */
+    public function setUserAgent(string $userAgent): void
+    {
+        $this->userAgent = $userAgent;
+    }
+
+    /**
+     * Get the User Agent string.
+     */
+    public function getUserAgent(): string
+    {
+        return $this->userAgent;
+    }
+
+    /**
      * Send a POST request to the Flickr API.
      * @param string $command The API endpoint to call.
      * @param string[] $args The API request arguments.
@@ -181,7 +206,10 @@ class PhpFlickr
         if (!($this->response) || $nocache) {
             $args = array_filter($args);
             $oauthService = $this->getOauthService();
-            $this->response = $oauthService->requestJson($command, 'POST', $args);
+            $extraHeaders = [
+                'User-Agent' => $this->getUserAgent(),
+            ];
+            $this->response = $oauthService->requestJson($command, 'POST', $args, $extraHeaders);
             if (!$nocache) {
                 $this->cache($request, $this->response);
             }
