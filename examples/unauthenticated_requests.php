@@ -21,6 +21,6 @@ $flickr = new \Samwilson\PhpFlickr\PhpFlickr($apiKey);
 
 // Get the 10 most recent photos, with URLs for their 'small' size.
 // For details of the size suffixes, see https://www.flickr.com/services/api/misc.urls.html
-$recent = $flickr->photosGetRecent(['url_s'], 10);
+$recent = $flickr->photos()->getRecent(['url_s'], 10);
 
 print_r($recent);

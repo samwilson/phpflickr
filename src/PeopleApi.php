@@ -75,7 +75,8 @@ class PeopleApi extends ApiMethodGroup
         $params = [
             'user_id' => $userId
         ];
-        return $this->flickr->request('flickr.people.getInfo', $params);
+        $response = $this->flickr->request('flickr.people.getInfo', $params);
+        return isset($response['person']) ? $response['person'] : null;
     }
 
     /**
