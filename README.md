@@ -216,6 +216,15 @@ This method doesn't allow for setting any photo metadata,
 but you can do the replacement asynchronously
 (in which case a 'ticket ID' will be returned).
 
+## User Agent
+
+If you are using PhpFlickr in an application, it is a good idea to set a custom user agent.
+This can be done with the following:
+
+```php
+$flickr->setUserAgent('MyVendor-MyApp/1.0.0');
+```
+
 ## Proxy server
 
 PhpFlickr can be used with a proxy server
