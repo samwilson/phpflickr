@@ -7,6 +7,9 @@ use Samwilson\PhpFlickr\PhpFlickr;
 use Samwilson\PhpFlickr\Tests\TestCase;
 use Samwilson\PhpFlickr\Util;
 
+/**
+ * @group auth
+ */
 class PhotosApiTest extends TestCase
 {
     /** @var int */
@@ -23,9 +26,6 @@ class PhotosApiTest extends TestCase
         return $this->testPhotoId;
     }
 
-    /**
-     * @group auth
-     */
     public function testAddTags()
     {
         $flickr = $this->getFlickr(true);
