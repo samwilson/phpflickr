@@ -2,8 +2,6 @@
 
 return [
     'file_suppressions' => [
-        'src/ActivityApi.php' => ['PhanUnextractableAnnotation'],
-        'src/BlogsApi.php' => ['PhanUnextractableAnnotation'],
         'src/CamerasApi.php' => ['PhanUnextractableAnnotation'],
         'src/CollectionsApi.php' => ['PhanUnextractableAnnotation'],
         'src/CommonsApi.php' => ['PhanUnextractableAnnotation'],
