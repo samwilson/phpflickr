@@ -135,7 +135,7 @@ class Uploader
             $uploadResponse['originalsecret'] = (string)$xml->photoid['originalsecret'];
         }
         if (isset($xml->ticketid)) {
-            $uploadResponse['ticketid'] = (int)$xml->ticketid;
+            $uploadResponse['ticketid'] = (string)$xml->ticketid;
         }
         if (isset($xml->err)) {
             $uploadResponse['code'] = (int)$xml->err['code'];
