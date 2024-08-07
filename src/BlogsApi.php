@@ -13,7 +13,7 @@ class BlogsApi extends ApiMethodGroup
      * @param string $service Optionally only return blogs for a given service id.  You
      * can get a list of from <a
      * href="/services/api/flickr.blogs.getServices.html">flickr.blogs.getServices()</a>.
-     * @return
+     * @return array
      */
     public function getList($service = null)
     {
@@ -30,7 +30,7 @@ class BlogsApi extends ApiMethodGroup
      *
      * @link https://www.flickr.com/services/api/flickr.blogs.getServices.html
      *
-     * @return
+     * @return array
      */
     public function getServices()
     {
@@ -50,7 +50,7 @@ class BlogsApi extends ApiMethodGroup
      * a blog id you can pass a service id and we'll post to the first blog of that
      * service we find.
      * @param string $blogId The id of the blog to post to.
-     * @return
+     * @return array
      */
     public function postPhoto($photoId, $title, $description, $blogPassword = null, $service = null, $blogId = null)
     {
