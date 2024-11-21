@@ -847,9 +847,9 @@ class PhotosApi extends ApiMethodGroup
      */
     public function setDates(
         $photoId,
-        DateTime $dateTaken = null,
+        DateTime|null $dateTaken = null,
         $dateTakenGranularity = null,
-        DateTime $datePosted = null
+        DateTime|null $datePosted = null
     ) {
         $args = ['photo_id' => $photoId];
         if (!empty($dateTaken)) {

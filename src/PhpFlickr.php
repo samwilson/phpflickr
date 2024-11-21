@@ -81,7 +81,7 @@ class PhpFlickr
      * @param string $apiKey
      * @param string|null $secret
      */
-    public function __construct(string $apiKey, string $secret = null)
+    public function __construct(string $apiKey, string|null $secret = null)
     {
         $this->api_key = $apiKey;
         $this->secret = $secret;
