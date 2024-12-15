@@ -7,7 +7,6 @@ use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
-use OAuth\OAuth1\Service\AbstractService;
 use OAuth\OAuth1\Service\Flickr;
 use OAuth\OAuth1\Signature\SignatureInterface;
 
@@ -37,17 +36,17 @@ class PhpFlickrService extends Flickr
         static::$baseUrl = rtrim($baseUrl, '/');
     }
 
-    public function getRequestTokenEndpoint()
+    public function getRequestTokenEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/request_token');
     }
 
-    public function getAuthorizationEndpoint()
+    public function getAuthorizationEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/authorize');
     }
 
-    public function getAccessTokenEndpoint()
+    public function getAccessTokenEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/access_token');
     }
