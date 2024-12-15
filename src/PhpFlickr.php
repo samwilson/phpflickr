@@ -283,7 +283,7 @@ class PhpFlickr
         $factory->setHttpClient(new CurlClient());
         $storage = $this->getOauthTokenStorage();
         $this->oauthService = $factory->createService('Flickr', $credentials, $storage);
-        assert( $this->oauthService instanceof PhpFlickrService );
+        assert($this->oauthService instanceof PhpFlickrService);
         return $this->oauthService;
     }
 
