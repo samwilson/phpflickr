@@ -21,7 +21,7 @@ class PhpFlickrService extends Flickr
         ClientInterface $httpClient,
         TokenStorageInterface $storage,
         SignatureInterface $signature,
-        UriInterface $baseApiUri = null
+        ?UriInterface $baseApiUri = null
     ) {
         if ($baseApiUri === null) {
             $baseApiUri = new Uri(static::$baseUrl . '/rest/');
