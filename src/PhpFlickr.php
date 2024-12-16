@@ -39,7 +39,7 @@ use Samwilson\PhpFlickr\Oauth\PhpFlickrService;
 class PhpFlickr
 {
     /** PhpFlickr version. */
-    public const VERSION = '5.1.0';
+    public const VERSION = '6.0.1';
 
     /** @param string */
     protected $api_key;
