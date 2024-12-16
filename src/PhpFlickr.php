@@ -26,6 +26,7 @@ use DateInterval;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\Uri;
+use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Storage\Memory;
 use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\OAuth1\Service\Flickr;
@@ -38,7 +39,7 @@ use Samwilson\PhpFlickr\Oauth\PhpFlickrService;
 class PhpFlickr
 {
     /** PhpFlickr version. */
-    public const VERSION = '5.1.0';
+    public const VERSION = '6.0.1';
 
     /** @param string */
     protected $api_key;
@@ -81,7 +82,7 @@ class PhpFlickr
      * @param string $apiKey
      * @param string|null $secret
      */
-    public function __construct(string $apiKey, string $secret = null)
+    public function __construct(string $apiKey, string|null $secret = null)
     {
         $this->api_key = $apiKey;
         $this->secret = $secret;
@@ -281,8 +282,8 @@ class PhpFlickr
         $factory->registerService('Flickr', PhpFlickrService::class);
         $factory->setHttpClient(new CurlClient());
         $storage = $this->getOauthTokenStorage();
-        /** @var PhpFlickrService $flickrService */
         $this->oauthService = $factory->createService('Flickr', $credentials, $storage);
+        assert($this->oauthService instanceof PhpFlickrService);
         return $this->oauthService;
     }
 
@@ -295,7 +296,7 @@ class PhpFlickr
      * @param string $perm One of 'read', 'write', or 'delete'.
      * @param string $callbackUrl Defaults to 'oob' ('out-of-band') for when no callback is
      * required, for example for console usage.
-     * @return Uri
+     * @return UriInterface
      */
     public function getAuthUrl($perm = 'read', $callbackUrl = 'oob')
     {

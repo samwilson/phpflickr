@@ -12,6 +12,7 @@ class Uploader
     /** @var PhpFlickr */
     protected $flickr;
 
+    protected $response;
     /** @var string */
     protected $uploadEndpoint = 'https://up.flickr.com/services/upload/';
 
