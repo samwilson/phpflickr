@@ -35,5 +35,9 @@ $result = $phpFlickr->uploader()->upload(
     true,
     true
 );
-$info = $phpFlickr->photos()->getInfo($result['photoid']);
-echo "The new photo is: " . $info['urls']['url'][0]['_content'] . "\n";
+if ($result['stat'] === 'fail') {
+    echo $result['message'] . "\n";
+} else {
+    $info = $phpFlickr->photos()->getInfo($result['photoid']);
+    echo "The new photo is: " . $info['urls']['url'][0]['_content'] . "\n";
+}
