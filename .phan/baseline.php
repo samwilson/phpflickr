@@ -17,11 +17,6 @@ return [
         'src/GroupsPoolsApi.php' => ['PhanUnextractableAnnotation'],
         'src/InterestingnessApi.php' => ['PhanUnextractableAnnotation'],
         'src/MachinetagsApi.php' => ['PhanUnextractableAnnotation'],
-        'src/Oauth/PhpFlickrService.php' => [
-            'PhanUndeclaredClass', 'PhanUndeclaredClassMethod', 'PhanUndeclaredExtendedClass',
-            'PhanUndeclaredMethod', 'PhanUndeclaredProperty', 'PhanUndeclaredTypeParameter',
-            'PhanUnreferencedUseNormal'
-        ],
         'src/PandaApi.php' => ['PhanUnextractableAnnotation'],
         'src/PeopleApi.php' => ['PhanUnextractableAnnotation'],
         'src/PhotosApi.php' => ['PhanTypeMismatchDefault', 'PhanTypeMismatchForeach', 'PhanUnextractableAnnotation'],
