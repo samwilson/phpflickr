@@ -30,12 +30,13 @@ abstract class TestCase extends PhpUnitTestCase
         $apiSecret = getenv('FLICKR_API_SECRET');
         $accessToken = getenv('FLICKR_ACCESS_TOKEN');
         $accessTokenSecret = getenv('FLICKR_ACCESS_SECRET');
-        if (empty($apiKey) && file_exists(__DIR__ . '/config.php')) {
-            require __DIR__ . '/config.php';
+        $configFile = __DIR__ . '/config.php';
+        if (empty($apiKey) && file_exists($configFile)) {
+            require $configFile;
         }
         if (empty($apiKey)) {
             // Skip if no key found, so PRs from forks can still be run in CI.
-            static::markTestSkipped('No Flickr API key set.');
+            static::markTestSkipped('No Flickr API key set (in either the FLICKR_* env vars or ' . $configFile . ')');
         }
         try {
             $this->flickrs[$authed] = new PhpFlickr($apiKey, $apiSecret);
