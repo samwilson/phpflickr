@@ -15,7 +15,7 @@ class ActivityApi extends ApiMethodGroup
      * omitted, it defaults to 10. The maximum allowed value is 50.
      * @param string $page The page of results to return. If this argument is omitted,
      * it defaults to 1.
-     * @return
+     * @return array
      */
     public function userComments($perPage = null, $page = null)
     {
@@ -41,7 +41,7 @@ class ActivityApi extends ApiMethodGroup
      * omitted, it defaults to 10. The maximum allowed value is 50.
      * @param string $page The page of results to return. If this argument is omitted,
      * it defaults to 1.
-     * @return
+     * @return array
      */
     public function userPhotos($timeframe = null, $perPage = null, $page = null)
     {

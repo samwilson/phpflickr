@@ -23,9 +23,6 @@ class PhotosApiTest extends TestCase
         return $this->testPhotoId;
     }
 
-    /**
-     * @group auth
-     */
     public function testAddTags()
     {
         $flickr = $this->getFlickr(true);
