@@ -27,12 +27,14 @@ Install with [Composer](https://getcomposer.org/):
 
     composer require samwilson/phpflickr
 
-Symfony developers can install a [bundle](https://github.com/survos/SurvosFlickrBundle):
+Alternatively, Symfony developers can install [a bundle](https://github.com/survos/SurvosFlickrBundle):
 
     composer require survos/flickr-bundle
 
-After setting the API key and secret in the environment, you can simply inject the FlickrService into your controller or service, rather than instanciating it as described below.
-    
+After setting the API key and secret in the environment,
+you can inject the `FlickrService` into your controller or service,
+rather than instantiating a PhpFlickr object as described below.
+
 ## Usage
 
 Once you've included Composer's autoloader, create a PhpFlickr object.
