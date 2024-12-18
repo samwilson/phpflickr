@@ -12,6 +12,7 @@ class Uploader
     /** @var PhpFlickr */
     protected $flickr;
 
+    protected $response;
     /** @var string */
     protected $uploadEndpoint = 'https://up.flickr.com/services/upload/';
 
@@ -135,7 +136,7 @@ class Uploader
             $uploadResponse['originalsecret'] = (string)$xml->photoid['originalsecret'];
         }
         if (isset($xml->ticketid)) {
-            $uploadResponse['ticketid'] = (int)$xml->ticketid;
+            $uploadResponse['ticketid'] = (string)$xml->ticketid;
         }
         if (isset($xml->err)) {
             $uploadResponse['code'] = (int)$xml->err['code'];

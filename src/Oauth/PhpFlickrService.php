@@ -7,9 +7,9 @@ use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
-use OAuth\OAuth1\Service\AbstractService;
 use OAuth\OAuth1\Service\Flickr;
 use OAuth\OAuth1\Signature\SignatureInterface;
+use OAuth\OAuth1\Token\TokenInterface;
 
 class PhpFlickrService extends Flickr
 {
@@ -21,7 +21,7 @@ class PhpFlickrService extends Flickr
         ClientInterface $httpClient,
         TokenStorageInterface $storage,
         SignatureInterface $signature,
-        UriInterface $baseApiUri = null
+        ?UriInterface $baseApiUri = null
     ) {
         if ($baseApiUri === null) {
             $baseApiUri = new Uri(static::$baseUrl . '/rest/');
@@ -37,17 +37,17 @@ class PhpFlickrService extends Flickr
         static::$baseUrl = rtrim($baseUrl, '/');
     }
 
-    public function getRequestTokenEndpoint()
+    public function getRequestTokenEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/request_token');
     }
 
-    public function getAuthorizationEndpoint()
+    public function getAuthorizationEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/authorize');
     }
 
-    public function getAccessTokenEndpoint()
+    public function getAccessTokenEndpoint(): UriInterface
     {
         return new Uri(static::$baseUrl . '/oauth/access_token');
     }
@@ -72,6 +72,7 @@ class PhpFlickrService extends Flickr
     public function getAuthorizationForPostingToAlternateUrl($args, $uri)
     {
         $token = $this->storage->retrieveAccessToken($this->service());
+        assert($token instanceof TokenInterface);
         $this->signature->setTokenSecret($token->getAccessTokenSecret());
         $authParameters = $this->getBasicAuthorizationHeaderInfo();
         if (isset($authParameters['oauth_callback'])) {
