@@ -4,9 +4,6 @@ namespace Samwilson\PhpFlickr\Tests\ApiMethodGroup;
 
 use Samwilson\PhpFlickr\Tests\TestCase;
 
-/**
- * @group auth
- */
 class PhotosetsApiTest extends TestCase
 {
     protected $testPhotoId;

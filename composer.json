@@ -39,7 +39,7 @@
 			"minus-x check . -q",
 			"phpcs -sp",
 			"@phan",
-			"phpunit --exclude-group auth",
+			"phpunit",
 			"git status | grep 'nothing to commit, working tree clean'"
 		]
 	}

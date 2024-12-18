@@ -7,9 +7,6 @@ use Samwilson\PhpFlickr\PhpFlickr;
 use Samwilson\PhpFlickr\Tests\TestCase;
 use Samwilson\PhpFlickr\Util;
 
-/**
- * @group auth
- */
 class PhotosApiTest extends TestCase
 {
     /** @var int */
