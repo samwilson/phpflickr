@@ -19,6 +19,9 @@ class Uploader
     /** @var string */
     protected $replaceEndpoint = 'https://up.flickr.com/services/replace/';
 
+    /** @var bool|string */
+    protected $response;
+
     /**
      * @param PhpFlickr $flickr
      */
