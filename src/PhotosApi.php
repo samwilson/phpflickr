@@ -474,7 +474,7 @@ class PhotosApi extends ApiMethodGroup
             }
             foreach ($sets['photoset'] as $photoset) {
                 foreach ($photoIds as $photoId) {
-                    if (in_array($photoId, $photoset['has_requested_photos'])) {
+                    if (is_array($photoset['has_requested_photos']) && in_array($photoId, $photoset['has_requested_photos'])) {
                         $out[] = $photoset;
                     }
                 }
