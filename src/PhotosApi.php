@@ -474,7 +474,8 @@ class PhotosApi extends ApiMethodGroup
             }
             foreach ($sets['photoset'] as $photoset) {
                 foreach ($photoIds as $photoId) {
-                    if (in_array($photoId, $photoset['has_requested_photos'])) {
+                    // has_requested_photos is only set if the user owns the photo.
+                    if (in_array($photoId, $photoset['has_requested_photos'] ?? [])) {
                         $out[] = $photoset;
                     }
                 }
